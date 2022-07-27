@@ -1,0 +1,916 @@
+{
+  "name": "OXO Update Order as Processed",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 4,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "80f1dc52",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> on a <span class=\"provider\">specified schedule</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "nu_order_connector_594131_1651695621",
+        "name": "custom_action",
+        "as": "9ddaa11b",
+        "title": null,
+        "description": "<span class=\"provider\">Custom action</span> in <span class=\"provider\">NuORDER</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "action_name": "Custom action",
+          "verb": "post",
+          "request_type": "raw",
+          "response_type": "json",
+          "output": "[{\"control_type\":\"text\",\"label\":\"Order number\",\"type\":\"string\",\"name\":\"order_number\",\"details\":{\"real_name\":\"order_number\"}},{\"control_type\":\"text\",\"label\":\"External ID\",\"type\":\"string\",\"name\":\"external_id\",\"details\":{\"real_name\":\"external_id\"}},{\"control_type\":\"text\",\"label\":\"Customer po number\",\"type\":\"string\",\"name\":\"customer_po_number\",\"details\":{\"real_name\":\"customer_po_number\"}},{\"control_type\":\"text\",\"label\":\"Currency code\",\"type\":\"string\",\"name\":\"currency_code\",\"details\":{\"real_name\":\"currency_code\"}},{\"control_type\":\"text\",\"label\":\"Status\",\"type\":\"string\",\"name\":\"status\",\"details\":{\"real_name\":\"status\"}},{\"control_type\":\"number\",\"label\":\"Discount\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"discount\",\"details\":{\"real_name\":\"discount\"}},{\"control_type\":\"text\",\"label\":\"Ship start\",\"type\":\"string\",\"name\":\"ship_start\",\"details\":{\"real_name\":\"ship_start\"}},{\"control_type\":\"text\",\"label\":\"Ship end\",\"type\":\"string\",\"name\":\"ship_end\",\"details\":{\"real_name\":\"ship_end\"}},{\"control_type\":\"text\",\"label\":\"Rep code\",\"type\":\"string\",\"name\":\"rep_code\",\"details\":{\"real_name\":\"rep_code\"}},{\"control_type\":\"text\",\"label\":\"Rep email\",\"type\":\"string\",\"name\":\"rep_email\",\"details\":{\"real_name\":\"rep_email\"}},{\"control_type\":\"text\",\"label\":\"Notes\",\"type\":\"string\",\"name\":\"notes\",\"details\":{\"real_name\":\"notes\"}},{\"label\":\"Billing address\",\"type\":\"object\",\"name\":\"billing_address\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Code\",\"type\":\"string\",\"name\":\"code\",\"details\":{\"real_name\":\"code\"}},{\"control_type\":\"text\",\"label\":\"Line 1\",\"type\":\"string\",\"name\":\"line_1\",\"details\":{\"real_name\":\"line_1\"}},{\"control_type\":\"text\",\"label\":\"Line 2\",\"type\":\"string\",\"name\":\"line_2\",\"details\":{\"real_name\":\"line_2\"}},{\"control_type\":\"text\",\"label\":\"City\",\"type\":\"string\",\"name\":\"city\",\"details\":{\"real_name\":\"city\"}},{\"control_type\":\"text\",\"label\":\"State\",\"type\":\"string\",\"name\":\"state\",\"details\":{\"real_name\":\"state\"}},{\"control_type\":\"text\",\"label\":\"Zip\",\"type\":\"string\",\"name\":\"zip\",\"details\":{\"real_name\":\"zip\"}},{\"control_type\":\"text\",\"label\":\"Country\",\"type\":\"string\",\"name\":\"country\",\"details\":{\"real_name\":\"country\"}}],\"details\":{\"real_name\":\"billing_address\"}},{\"label\":\"Shipping address\",\"type\":\"object\",\"name\":\"shipping_address\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Code\",\"type\":\"string\",\"name\":\"code\",\"details\":{\"real_name\":\"code\"}},{\"control_type\":\"text\",\"label\":\"Line 1\",\"type\":\"string\",\"name\":\"line_1\",\"details\":{\"real_name\":\"line_1\"}},{\"control_type\":\"text\",\"label\":\"Line 2\",\"type\":\"string\",\"name\":\"line_2\",\"details\":{\"real_name\":\"line_2\"}},{\"control_type\":\"text\",\"label\":\"City\",\"type\":\"string\",\"name\":\"city\",\"details\":{\"real_name\":\"city\"}},{\"control_type\":\"text\",\"label\":\"State\",\"type\":\"string\",\"name\":\"state\",\"details\":{\"real_name\":\"state\"}},{\"control_type\":\"text\",\"label\":\"Zip\",\"type\":\"string\",\"name\":\"zip\",\"details\":{\"real_name\":\"zip\"}},{\"control_type\":\"text\",\"label\":\"Country\",\"type\":\"string\",\"name\":\"country\",\"details\":{\"real_name\":\"country\"}}],\"details\":{\"real_name\":\"shipping_address\"}},{\"label\":\"Retailer\",\"type\":\"object\",\"name\":\"retailer\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Retailer code\",\"type\":\"string\",\"name\":\"retailer_code\",\"details\":{\"real_name\":\"retailer_code\"}},{\"control_type\":\"text\",\"label\":\"Buyer email\",\"type\":\"string\",\"name\":\"buyer_email\",\"details\":{\"real_name\":\"buyer_email\"}}],\"details\":{\"real_name\":\"retailer\"}},{\"name\":\"line_items\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Line items\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Brand ID\",\"type\":\"string\",\"name\":\"brand_id\",\"details\":{\"real_name\":\"brand_id\"}},{\"control_type\":\"text\",\"label\":\"Season\",\"type\":\"string\",\"name\":\"season\",\"details\":{\"real_name\":\"season\"}},{\"control_type\":\"text\",\"label\":\"Style number\",\"type\":\"string\",\"name\":\"style_number\",\"details\":{\"real_name\":\"style_number\"}},{\"control_type\":\"text\",\"label\":\"Color\",\"type\":\"string\",\"name\":\"color\",\"details\":{\"real_name\":\"color\"}},{\"control_type\":\"number\",\"label\":\"Discount\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"discount\",\"details\":{\"real_name\":\"discount\"}},{\"control_type\":\"text\",\"label\":\"Ship start\",\"type\":\"string\",\"name\":\"ship_start\",\"details\":{\"real_name\":\"ship_start\"}},{\"control_type\":\"text\",\"label\":\"Ship end\",\"type\":\"string\",\"name\":\"ship_end\",\"details\":{\"real_name\":\"ship_end\"}},{\"control_type\":\"text\",\"label\":\"Notes\",\"type\":\"string\",\"name\":\"notes\",\"details\":{\"real_name\":\"notes\"}},{\"control_type\":\"text\",\"label\":\"Warehouse\",\"type\":\"string\",\"name\":\"warehouse\",\"details\":{\"real_name\":\"warehouse\"}},{\"name\":\"sizes\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Sizes\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Size\",\"type\":\"string\",\"name\":\"size\",\"details\":{\"real_name\":\"size\"}},{\"control_type\":\"text\",\"label\":\"Upc\",\"type\":\"string\",\"name\":\"upc\",\"details\":{\"real_name\":\"upc\"}},{\"control_type\":\"number\",\"label\":\"Quantity\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"quantity\",\"details\":{\"real_name\":\"quantity\"}},{\"control_type\":\"number\",\"label\":\"Price\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"price\",\"details\":{\"real_name\":\"price\"}},{\"control_type\":\"number\",\"label\":\"Original price\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"original_price\",\"details\":{\"real_name\":\"original_price\"}}],\"details\":{\"real_name\":\"sizes\"}},{\"control_type\":\"text\",\"label\":\"Prebook\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Prebook\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"prebook\"},\"type\":\"boolean\",\"name\":\"prebook\",\"details\":{\"real_name\":\"prebook\"}}],\"details\":{\"real_name\":\"line_items\"}},{\"label\":\"Shipping information\",\"type\":\"object\",\"name\":\"shipping_information\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Service type\",\"type\":\"string\",\"name\":\"service_type\",\"details\":{\"real_name\":\"service_type\"}},{\"control_type\":\"text\",\"label\":\"Service code\",\"type\":\"string\",\"name\":\"service_code\",\"details\":{\"real_name\":\"service_code\"}},{\"control_type\":\"text\",\"label\":\"Carrier code\",\"type\":\"string\",\"name\":\"carrier_code\",\"details\":{\"real_name\":\"carrier_code\"}},{\"control_type\":\"text\",\"label\":\"Carrier friendly name\",\"type\":\"string\",\"name\":\"carrier_friendly_name\",\"details\":{\"real_name\":\"carrier_friendly_name\"}},{\"control_type\":\"number\",\"label\":\"Price\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"price\",\"details\":{\"real_name\":\"price\"}},{\"control_type\":\"number\",\"label\":\"Final amount\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"final_amount\",\"details\":{\"real_name\":\"final_amount\"}}],\"details\":{\"real_name\":\"shipping_information\"}},{\"control_type\":\"number\",\"label\":\"Total\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"total\",\"details\":{\"real_name\":\"total\"}},{\"name\":\"shipments\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Shipments\",\"properties\":[{\"name\":\"line_items\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Line items\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Brand ID\",\"type\":\"string\",\"name\":\"brand_id\",\"details\":{\"real_name\":\"brand_id\"}},{\"control_type\":\"text\",\"label\":\"Season\",\"type\":\"string\",\"name\":\"season\",\"details\":{\"real_name\":\"season\"}},{\"control_type\":\"text\",\"label\":\"Style number\",\"type\":\"string\",\"name\":\"style_number\",\"details\":{\"real_name\":\"style_number\"}},{\"control_type\":\"text\",\"label\":\"Color\",\"type\":\"string\",\"name\":\"color\",\"details\":{\"real_name\":\"color\"}},{\"control_type\":\"text\",\"label\":\"Sizes\",\"type\":\"string\",\"name\":\"sizes\",\"details\":{\"real_name\":\"sizes\"}}],\"details\":{\"real_name\":\"line_items\"}},{\"control_type\":\"text\",\"label\":\"Type\",\"type\":\"string\",\"name\":\"type\",\"details\":{\"real_name\":\"type\"}},{\"name\":\"tracking_numbers\",\"type\":\"array\",\"of\":\"string\",\"control_type\":\"text\",\"label\":\"Tracking numbers\",\"details\":{\"real_name\":\"tracking_numbers\"}},{\"control_type\":\"text\",\"label\":\"Status\",\"type\":\"string\",\"name\":\"status\",\"details\":{\"real_name\":\"status\"}},{\"control_type\":\"number\",\"label\":\"Shipment date ` date`\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"shipment_date_`Date`\",\"details\":{\"real_name\":\"shipment_date `Date`\"}}],\"details\":{\"real_name\":\"shipments\"}}]",
+          "path": "order/62e05fa4f75e6a6035e8a356/processed"
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "body",
+            "label": "Body",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Order number",
+                "details": {
+                  "real_name": "order_number"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "order_number"
+              },
+              {
+                "control_type": "text",
+                "label": "External ID",
+                "details": {
+                  "real_name": "external_id"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "external_id"
+              },
+              {
+                "control_type": "text",
+                "label": "Customer po number",
+                "details": {
+                  "real_name": "customer_po_number"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "customer_po_number"
+              },
+              {
+                "control_type": "text",
+                "label": "Currency code",
+                "details": {
+                  "real_name": "currency_code"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "currency_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Status",
+                "details": {
+                  "real_name": "status"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "status"
+              },
+              {
+                "control_type": "number",
+                "label": "Discount",
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "discount"
+                },
+                "optional": true,
+                "type": "number",
+                "name": "discount"
+              },
+              {
+                "control_type": "text",
+                "label": "Ship start",
+                "details": {
+                  "real_name": "ship_start"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "ship_start"
+              },
+              {
+                "control_type": "text",
+                "label": "Ship end",
+                "details": {
+                  "real_name": "ship_end"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "ship_end"
+              },
+              {
+                "control_type": "text",
+                "label": "Rep code",
+                "details": {
+                  "real_name": "rep_code"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "rep_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Rep email",
+                "details": {
+                  "real_name": "rep_email"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "rep_email"
+              },
+              {
+                "control_type": "text",
+                "label": "Notes",
+                "details": {
+                  "real_name": "notes"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "notes"
+              },
+              {
+                "label": "Billing address",
+                "details": {
+                  "real_name": "billing_address"
+                },
+                "optional": true,
+                "type": "object",
+                "name": "billing_address",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Code",
+                    "details": {
+                      "real_name": "code"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Line 1",
+                    "details": {
+                      "real_name": "line_1"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "line_1"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Line 2",
+                    "details": {
+                      "real_name": "line_2"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "line_2"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "City",
+                    "details": {
+                      "real_name": "city"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "city"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "State",
+                    "details": {
+                      "real_name": "state"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "state"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Zip",
+                    "details": {
+                      "real_name": "zip"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "zip"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Country",
+                    "details": {
+                      "real_name": "country"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "country"
+                  }
+                ]
+              },
+              {
+                "label": "Shipping address",
+                "details": {
+                  "real_name": "shipping_address"
+                },
+                "optional": true,
+                "type": "object",
+                "name": "shipping_address",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Code",
+                    "details": {
+                      "real_name": "code"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Line 1",
+                    "details": {
+                      "real_name": "line_1"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "line_1"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Line 2",
+                    "details": {
+                      "real_name": "line_2"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "line_2"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "City",
+                    "details": {
+                      "real_name": "city"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "city"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "State",
+                    "details": {
+                      "real_name": "state"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "state"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Zip",
+                    "details": {
+                      "real_name": "zip"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "zip"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Country",
+                    "details": {
+                      "real_name": "country"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "country"
+                  }
+                ]
+              },
+              {
+                "label": "Retailer",
+                "details": {
+                  "real_name": "retailer"
+                },
+                "optional": true,
+                "type": "object",
+                "name": "retailer",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Retailer code",
+                    "details": {
+                      "real_name": "retailer_code"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "retailer_code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Buyer email",
+                    "details": {
+                      "real_name": "buyer_email"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "buyer_email"
+                  }
+                ]
+              },
+              {
+                "name": "line_items",
+                "type": "array",
+                "of": "object",
+                "label": "Line items",
+                "details": {
+                  "real_name": "line_items"
+                },
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Brand ID",
+                    "details": {
+                      "real_name": "brand_id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "brand_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Season",
+                    "details": {
+                      "real_name": "season"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "season"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Style number",
+                    "details": {
+                      "real_name": "style_number"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "style_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Color",
+                    "details": {
+                      "real_name": "color"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "color"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Discount",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "discount"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "discount"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Ship start",
+                    "details": {
+                      "real_name": "ship_start"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "ship_start"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Ship end",
+                    "details": {
+                      "real_name": "ship_end"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "ship_end"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Notes",
+                    "details": {
+                      "real_name": "notes"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "notes"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Warehouse",
+                    "details": {
+                      "real_name": "warehouse"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "warehouse"
+                  },
+                  {
+                    "name": "sizes",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Sizes",
+                    "details": {
+                      "real_name": "sizes"
+                    },
+                    "optional": true,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Size",
+                        "details": {
+                          "real_name": "size"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "size"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Upc",
+                        "details": {
+                          "real_name": "upc"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "upc"
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Quantity",
+                        "parse_output": "float_conversion",
+                        "details": {
+                          "real_name": "quantity"
+                        },
+                        "optional": true,
+                        "type": "number",
+                        "name": "quantity"
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Price",
+                        "parse_output": "float_conversion",
+                        "details": {
+                          "real_name": "price"
+                        },
+                        "optional": true,
+                        "type": "number",
+                        "name": "price"
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Original price",
+                        "parse_output": "float_conversion",
+                        "details": {
+                          "real_name": "original_price"
+                        },
+                        "optional": true,
+                        "type": "number",
+                        "name": "original_price"
+                      }
+                    ]
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Prebook",
+                    "parse_output": {
+                    },
+                    "render_input": {
+                    },
+                    "toggle_hint": "Select from option list",
+                    "toggle_field": {
+                      "label": "Prebook",
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "type": "boolean",
+                      "name": "prebook"
+                    },
+                    "details": {
+                      "real_name": "prebook"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "prebook"
+                  }
+                ]
+              },
+              {
+                "label": "Shipping information",
+                "details": {
+                  "real_name": "shipping_information"
+                },
+                "optional": true,
+                "type": "object",
+                "name": "shipping_information",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Service type",
+                    "details": {
+                      "real_name": "service_type"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "service_type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Service code",
+                    "details": {
+                      "real_name": "service_code"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "service_code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Carrier code",
+                    "details": {
+                      "real_name": "carrier_code"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "carrier_code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Carrier friendly name",
+                    "details": {
+                      "real_name": "carrier_friendly_name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "carrier_friendly_name"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Price",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "price"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "price"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Final amount",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "final_amount"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "final_amount"
+                  }
+                ]
+              },
+              {
+                "control_type": "number",
+                "label": "Total",
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "total"
+                },
+                "optional": true,
+                "type": "number",
+                "name": "total"
+              },
+              {
+                "name": "shipments",
+                "type": "array",
+                "of": "object",
+                "label": "Shipments",
+                "details": {
+                  "real_name": "shipments"
+                },
+                "optional": true,
+                "properties": [
+                  {
+                    "name": "line_items",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Line items",
+                    "details": {
+                      "real_name": "line_items"
+                    },
+                    "optional": true,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Brand ID",
+                        "details": {
+                          "real_name": "brand_id"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "brand_id"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Season",
+                        "details": {
+                          "real_name": "season"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "season"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Style number",
+                        "details": {
+                          "real_name": "style_number"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "style_number"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Color",
+                        "details": {
+                          "real_name": "color"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "color"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Sizes",
+                        "details": {
+                          "real_name": "sizes"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "sizes"
+                      }
+                    ]
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Type",
+                    "details": {
+                      "real_name": "type"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "type"
+                  },
+                  {
+                    "name": "tracking_numbers",
+                    "type": "array",
+                    "of": "string",
+                    "label": "Tracking numbers",
+                    "details": {
+                      "real_name": "tracking_numbers"
+                    },
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "details": {
+                      "real_name": "status"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "status"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Shipment date ` date`",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "shipment_date `Date`"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "shipment_date___60__Date__60__"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "string",
+            "name": "path",
+            "control_type": "text",
+            "label": "Path",
+            "hint": "Base URI is <b>https://sandbox1.nuorder.com/api/</b> - path will be appended to this URI. Use absolute URI to override this base URI.",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "request_type",
+            "control_type": "select",
+            "label": "Request type",
+            "default": "json",
+            "sticky": true,
+            "pick_list": [
+              [
+                "JSON request body",
+                "json"
+              ],
+              [
+                "URL encoded form",
+                "url_encoded_form"
+              ],
+              [
+                "Mutipart form",
+                "multipart"
+              ],
+              [
+                "Raw request body",
+                "raw"
+              ]
+            ],
+            "optional": true,
+            "extends_schema": true
+          },
+          {
+            "type": "string",
+            "name": "response_type",
+            "control_type": "select",
+            "label": "Response type",
+            "default": "json",
+            "sticky": false,
+            "pick_list": [
+              [
+                "JSON response",
+                "json"
+              ],
+              [
+                "Raw response",
+                "raw"
+              ]
+            ],
+            "optional": true,
+            "extends_schema": true
+          },
+          {
+            "type": "object",
+            "name": "input",
+            "label": "Request body parameters",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text-area",
+                "label": "Data",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "data"
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "name": "request_headers",
+            "control_type": "key_value",
+            "label": "Request headers",
+            "sticky": false,
+            "optional": true,
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Key",
+                "optional": true,
+                "type": "string",
+                "name": "key"
+              },
+              {
+                "control_type": "text",
+                "label": "Value",
+                "optional": true,
+                "type": "string",
+                "name": "value"
+              }
+            ],
+            "extends_schema": true
+          },
+          {
+            "type": "string",
+            "name": "output",
+            "control_type": "schema-designer",
+            "label": "Response body",
+            "sticky": true,
+            "optional": true,
+            "extends_schema": true,
+            "schema_neutral": true
+          },
+          {
+            "type": "string",
+            "name": "response_headers",
+            "control_type": "schema-designer",
+            "label": "Response headers",
+            "sticky": false,
+            "optional": true,
+            "extends_schema": true,
+            "schema_neutral": true
+          }
+        ],
+        "uuid": "dd928e59-c171-4b1f-b312-6a7dc81487c7"
+      }
+    ],
+    "uuid": "41aa7a7c-b799-4eb0-92a1-fb2015d9a2e2"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "nu_order_connector_594131_1651695621",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "nuorder_oxo_sandbox_api.connection.json",
+        "name": "NuORDER OXO - Sandbox API",
+        "folder": "",
+        "custom": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "name": "AOF | PS-001 | AOF_Topic",
+  "schema": [
+    {
+      "label": "Error Handling Data",
+      "name": "errorHandlingData",
+      "type": "object",
+      "optional": false,
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Status",
+          "name": "Status",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "LOB",
+          "name": "LOB",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "label": "Job Details",
+          "name": "jobDetails",
+          "type": "object",
+          "optional": false,
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "Identifier",
+              "name": "identifier",
+              "hint": "Identifier value for record or data. Ex: Account ID, External ID.",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "control_type": "text",
+              "label": "Transaction type",
+              "name": "transactionType",
+              "hint": "Type of action/s involved inside the catch scope. Ex: invocation, record insertion, mapping.",
+              "type": "string",
+              "sticky": true,
+              "optional": true
+            },
+            {
+              "control_type": "text",
+              "label": "Transaction description",
+              "name": "transactionDescription",
+              "hint": "Brief description of action/s involved in the catch scope.",
+              "type": "string",
+              "sticky": true,
+              "optional": true
+            },
+            {
+              "control_type": "text",
+              "label": "Event type",
+              "name": "EventType",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "control_type": "text",
+              "label": "Event description",
+              "name": "EventDescription",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "control_type": "text",
+              "label": "Job ID",
+              "name": "jobID",
+              "hint": "Use Properties - Job ID.",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "control_type": "text",
+              "label": "Recipe ID",
+              "name": "recipeID",
+              "hint": "Use Properties - Recipe ID",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "control_type": "text",
+              "label": "Date/Time",
+              "hint": "Timestamp of the action/s. Use timestamp of action or 'now' in formula mode.",
+              "name": "dateTime",
+              "type": "string",
+              "optional": false
+            },
+            {
+              "control_type": "text",
+              "label": "Free text",
+              "name": "freeText",
+              "type": "string",
+              "optional": true
+            }
+          ]
+        },
+        {
+          "label": "Error Details",
+          "name": "errorDetails",
+          "type": "object",
+          "of": "object",
+          "optional": true,
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "Parent Job ID",
+              "name": "parentJobID",
+              "hint": "Use Properties > Parent Job ID.",
+              "type": "string",
+              "optional": true
+            },
+            {
+              "control_type": "text",
+              "label": "Error code",
+              "name": "errorCode",
+              "type": "string",
+              "optional": true
+            },
+            {
+              "control_type": "text",
+              "label": "Error message",
+              "name": "errorMessage",
+              "type": "string",
+              "hint": "Use an error code defined in the error code lookup table",
+              "sticky": true,
+              "optional": true
+            },
+            {
+              "control_type": "text",
+              "label": "Stack trace",
+              "hint": "Raw error message",
+              "name": "stackTrace",
+              "type": "string",
+              "sticky": true,
+              "optional": true
+            }
+          ]
+        },
+        {
+          "label": "Custom data",
+          "name": "customData",
+          "type": "object",
+          "optional": true,
+          "properties": [
+            {
+              "name": "customFields",
+              "type": "array",
+              "of": "object",
+              "label": "Custom fields",
+              "optional": true,
+              "properties": [
+                {
+                  "control_type": "text",
+                  "label": "Key",
+                  "name": "key",
+                  "type": "string",
+                  "optional": true
+                },
+                {
+                  "control_type": "text",
+                  "label": "Value",
+                  "name": "value",
+                  "type": "string",
+                  "optional": true
+                }
+              ]
+            },
+            {
+              "name": "customArrays",
+              "type": "array",
+              "of": "object",
+              "label": "Custom arrays",
+              "optional": true,
+              "properties": [
+                {
+                  "control_type": "text",
+                  "label": "Array name",
+                  "name": "arrayName",
+                  "type": "string",
+                  "optional": true
+                },
+                {
+                  "name": "internalArray",
+                  "type": "array",
+                  "of": "object",
+                  "label": "Internal array",
+                  "optional": true,
+                  "properties": [
+                    {
+                      "control_type": "text",
+                      "label": "Value",
+                      "name": "value",
+                      "type": "string",
+                      "optional": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

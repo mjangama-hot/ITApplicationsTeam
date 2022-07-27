@@ -1,0 +1,10 @@
+{
+  "name": "NuOrder HYF - Sandbox API",
+  "provider": {
+    "zip_name": "nuorder.custom_adapter.json",
+    "name": "NuORDER",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}

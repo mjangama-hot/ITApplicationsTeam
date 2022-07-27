@@ -1,0 +1,475 @@
+{
+  "name": "Nuorder_item",
+  "schema": [
+    {
+      "control_type": "text",
+      "label": "Style number",
+      "type": "string",
+      "name": "style_number"
+    },
+    {
+      "control_type": "text",
+      "label": "Season",
+      "type": "string",
+      "name": "season"
+    },
+    {
+      "control_type": "text",
+      "label": "Color",
+      "type": "string",
+      "name": "color"
+    },
+    {
+      "control_type": "text",
+      "label": "Name",
+      "type": "string",
+      "name": "name"
+    },
+    {
+      "control_type": "text",
+      "label": "Brand ID",
+      "type": "string",
+      "name": "brand_id"
+    },
+    {
+      "control_type": "text",
+      "label": "Size",
+      "type": "string",
+      "name": "size"
+    },
+    {
+      "control_type": "text",
+      "label": "Cancelled",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Cancelled",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "cancelled"
+      },
+      "type": "string",
+      "name": "cancelled",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Archived",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Archived",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "archived"
+      },
+      "type": "string",
+      "name": "archived",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Active",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Active",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "active"
+      },
+      "type": "string",
+      "name": "active",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Portal",
+      "name": "Portal",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Operation",
+      "name": "Operation",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "name": "sizes",
+      "type": "array",
+      "of": "object",
+      "label": "Sizes",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Size",
+          "type": "string",
+          "name": "size"
+        },
+        {
+          "control_type": "text",
+          "label": "units_per_pack",
+          "type": "string",
+          "name": "Units_Per_Pack"
+        },
+        {
+          "control_type": "text",
+          "label": "upc",
+          "type": "string",
+          "name": "UPC"
+        },
+        {
+          "control_type": "text",
+          "label": "ean",
+          "type": "string",
+          "name": "Ean"
+        }
+      ]
+    },
+    {
+      "label": "Pricing",
+      "type": "object",
+      "name": "pricing",
+      "optional": true,
+      "properties": [
+        {
+          "label": "USD",
+          "type": "object",
+          "name": "USD",
+          "optional": true,
+          "properties": [
+            {
+              "control_type": "number",
+              "label": "Wholesale",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "wholesale",
+              "optional": true
+            },
+            {
+              "control_type": "number",
+              "label": "Retail",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "retail",
+              "optional": true
+            },
+            {
+              "control_type": "checkbox",
+              "label": "Disabled",
+              "render_input": {
+              },
+              "parse_output": {
+              },
+              "toggle_hint": "Select from option list",
+              "toggle_field": {
+                "label": "Disabled",
+                "control_type": "text",
+                "toggle_hint": "Use custom value",
+                "type": "boolean",
+                "name": "disabled"
+              },
+              "type": "boolean",
+              "name": "disabled",
+              "optional": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "control_type": "number",
+      "label": "Unit weight",
+      "parse_output": "float_conversion",
+      "name": "unit_weight",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "Volume uom",
+      "parse_output": "float_conversion",
+      "name": "volume_uom",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "Unit dims",
+      "parse_output": "float_conversion",
+      "name": "unit_dims",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "Unit volume",
+      "parse_output": "float_conversion",
+      "name": "unit_volume",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "Unit height",
+      "parse_output": "float_conversion",
+      "name": "unit_height",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "Unit width",
+      "parse_output": "float_conversion",
+      "name": "unit_width",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "Unit length",
+      "parse_output": "float_conversion",
+      "name": "unit_length",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Retail packaging",
+      "name": "retail_packaging",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Finish series",
+      "name": "finish_series",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Warranty period",
+      "name": "warranty_period",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Cost category tariff code",
+      "name": "cost_category_tariff_code",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Cap style",
+      "name": "cap_style",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Ip gtin",
+      "name": "ip_gtin",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Case gtin",
+      "name": "case_gtin",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Item status",
+      "name": "item_status",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Units per pack",
+      "name": "units_per_pack",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Product size",
+      "name": "product_size",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Brand name",
+      "name": "brand_name",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "US",
+      "name": "US",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Canada",
+      "name": "canada",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Emea",
+      "name": "emea",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Latam apac",
+      "name": "latam_apac",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Us target launch date",
+      "name": "us_target_launch_date",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Ca target launch date",
+      "name": "ca_target_launch_date",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Emea target launch date",
+      "name": "emea_target_launch_date",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Latam apac target launch date",
+      "name": "latam_apac_target_launch_date",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Us end of life",
+      "name": "us_end_of_life",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Ca end of life",
+      "name": "ca_end_of_life",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Emea end of life",
+      "name": "emea_end_of_life",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Latam apac end of life",
+      "name": "latam_apac_end_of_life",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Item subtype",
+      "name": "item_subtype",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Item sub sub type",
+      "name": "item_sub_Sub_type",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Merch collection",
+      "name": "merch_collection",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Marketing flag",
+      "name": "marketing_flag",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Packaging",
+      "name": "packaging",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Country of origin",
+      "name": "country_of_origin",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Division",
+      "name": "division",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Category",
+      "name": "category",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Sub category",
+      "name": "sub_category",
+      "type": "string",
+      "optional": false
+    }
+  ]
+}

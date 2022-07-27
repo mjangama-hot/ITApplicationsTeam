@@ -1,0 +1,656 @@
+{
+  "name": "Testing Get Order",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 5,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "e267fc3f",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> on a <span class=\"provider\">specified schedule</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "nu_order_connector_594131_1651695621",
+        "name": "get_record",
+        "as": "e7dfa148",
+        "title": null,
+        "description": "Get <span class=\"provider\">Order</span> in <span class=\"provider\">NuORDER</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "object": "Order"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "object": "order",
+          "id": "627968fdb67e4eaac8fff7cb"
+        },
+        "extended_output_schema": [
+          {
+            "type": "string",
+            "name": "order_number",
+            "control_type": "text",
+            "label": "Order number",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "external_id",
+            "control_type": "text",
+            "label": "External ID",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "customer_po_number",
+            "control_type": "text",
+            "label": "Customer po number",
+            "optional": true
+          },
+          {
+            "type": "string",
+            "name": "currency_code",
+            "control_type": "text",
+            "label": "Currency code",
+            "hint": "E.g. USD",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "status",
+            "control_type": "text",
+            "label": "Status",
+            "optional": true
+          },
+          {
+            "type": "number",
+            "name": "discount",
+            "control_type": "number",
+            "label": "Discount",
+            "hint": "Provide Discount percentage (0 - 100)",
+            "optional": true,
+            "render_input": "float_conversion",
+            "parse_output": "float_conversion"
+          },
+          {
+            "type": "date_time",
+            "name": "ship_start",
+            "control_type": "date",
+            "label": "Ship start",
+            "hint": "Provide Date format as <b>YYYY/mm/dd</b>",
+            "optional": false,
+            "render_input": "format_date",
+            "parse_output": "date_conversion"
+          },
+          {
+            "type": "date_time",
+            "name": "ship_end",
+            "control_type": "date",
+            "label": "Ship end",
+            "hint": "Provide Date format as <b>YYYY/mm/dd</b>",
+            "optional": false,
+            "render_input": "format_date",
+            "parse_output": "date_conversion"
+          },
+          {
+            "type": "string",
+            "name": "rep_code",
+            "control_type": "text",
+            "label": "Rep code",
+            "optional": true
+          },
+          {
+            "type": "string",
+            "name": "rep_email",
+            "control_type": "text",
+            "label": "Rep email",
+            "optional": true
+          },
+          {
+            "type": "string",
+            "name": "notes",
+            "control_type": "text",
+            "label": "Notes",
+            "optional": true
+          },
+          {
+            "type": "object",
+            "name": "billing_address",
+            "label": "Billing address",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Code",
+                "optional": true,
+                "type": "string",
+                "name": "code"
+              },
+              {
+                "control_type": "text",
+                "label": "Line 1",
+                "optional": true,
+                "type": "string",
+                "name": "line_1"
+              },
+              {
+                "control_type": "text",
+                "label": "Line 2",
+                "optional": true,
+                "type": "string",
+                "name": "line_2"
+              },
+              {
+                "control_type": "text",
+                "label": "City",
+                "optional": true,
+                "type": "string",
+                "name": "city"
+              },
+              {
+                "control_type": "text",
+                "label": "State",
+                "hint": "E.g. GA",
+                "optional": true,
+                "type": "string",
+                "name": "state"
+              },
+              {
+                "control_type": "text",
+                "label": "Zip",
+                "optional": true,
+                "type": "string",
+                "name": "zip"
+              },
+              {
+                "control_type": "text",
+                "label": "Country",
+                "hint": "E.g. US",
+                "optional": true,
+                "type": "string",
+                "name": "country"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "shipping_address",
+            "label": "Shipping address",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Code",
+                "optional": true,
+                "type": "string",
+                "name": "code"
+              },
+              {
+                "control_type": "text",
+                "label": "Line 1",
+                "optional": true,
+                "type": "string",
+                "name": "line_1"
+              },
+              {
+                "control_type": "text",
+                "label": "Line 2",
+                "optional": true,
+                "type": "string",
+                "name": "line_2"
+              },
+              {
+                "control_type": "text",
+                "label": "City",
+                "optional": true,
+                "type": "string",
+                "name": "city"
+              },
+              {
+                "control_type": "text",
+                "label": "State",
+                "hint": "E.g. GA",
+                "optional": true,
+                "type": "string",
+                "name": "state"
+              },
+              {
+                "control_type": "text",
+                "label": "Zip",
+                "optional": true,
+                "type": "string",
+                "name": "zip"
+              },
+              {
+                "control_type": "text",
+                "label": "Country",
+                "hint": "E.g. US",
+                "optional": true,
+                "type": "string",
+                "name": "country"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "retailer",
+            "label": "Retailer",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Retailer code",
+                "optional": false,
+                "type": "string",
+                "name": "retailer_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Buyer email",
+                "optional": false,
+                "type": "string",
+                "name": "buyer_email"
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "name": "line_items",
+            "label": "Line items",
+            "optional": false,
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Brand ID",
+                "hint": "External ID of the product.",
+                "optional": true,
+                "type": "string",
+                "name": "brand_id"
+              },
+              {
+                "control_type": "text",
+                "label": "Season",
+                "optional": true,
+                "type": "string",
+                "name": "season"
+              },
+              {
+                "control_type": "text",
+                "label": "Style number",
+                "optional": true,
+                "type": "string",
+                "name": "style_number"
+              },
+              {
+                "control_type": "text",
+                "label": "Color",
+                "optional": true,
+                "type": "string",
+                "name": "color"
+              },
+              {
+                "control_type": "number",
+                "label": "Discount",
+                "parse_output": "float_conversion",
+                "render_input": "float_conversion",
+                "hint": "Provide Discount percentage (0 - 100)",
+                "optional": true,
+                "type": "number",
+                "name": "discount"
+              },
+              {
+                "control_type": "date",
+                "label": "Ship start",
+                "render_input": "format_date",
+                "parse_output": "date_conversion",
+                "optional": false,
+                "hint": "Provide Date format as <b>YYYY/mm/dd</b>",
+                "type": "date_time",
+                "name": "ship_start"
+              },
+              {
+                "control_type": "date",
+                "label": "Ship end",
+                "render_input": "format_date",
+                "parse_output": "date_conversion",
+                "optional": false,
+                "hint": "Provide Date format as <b>YYYY/mm/dd</b>",
+                "type": "date_time",
+                "name": "ship_end"
+              },
+              {
+                "control_type": "text",
+                "label": "Notes",
+                "optional": true,
+                "type": "string",
+                "name": "notes"
+              },
+              {
+                "control_type": "text",
+                "label": "Warehouse",
+                "optional": true,
+                "type": "string",
+                "name": "warehouse"
+              },
+              {
+                "name": "sizes",
+                "type": "array",
+                "of": "object",
+                "label": "Sizes",
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Size",
+                    "hint": "E.g. Small",
+                    "optional": true,
+                    "type": "string",
+                    "name": "size"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Upc",
+                    "optional": true,
+                    "type": "string",
+                    "name": "upc"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Quantity",
+                    "parse_output": "float_conversion",
+                    "optional": false,
+                    "render_input": "float_conversion",
+                    "type": "number",
+                    "name": "quantity"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Price",
+                    "parse_output": "float_conversion",
+                    "optional": false,
+                    "render_input": "float_conversion",
+                    "type": "number",
+                    "name": "price"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Original price",
+                    "parse_output": "float_conversion",
+                    "render_input": "float_conversion",
+                    "optional": true,
+                    "type": "number",
+                    "name": "original_price"
+                  }
+                ]
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Prebook",
+                "parse_output": "float_conversion",
+                "render_input": "boolean_conversion",
+                "toggle_hint": "Select from list",
+                "toggle_field": {
+                  "name": "prebook",
+                  "label": "Prebook",
+                  "type": "string",
+                  "control_type": "text",
+                  "render_input": "boolean_conversion",
+                  "optional": true,
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are true, false"
+                },
+                "optional": true,
+                "type": "number",
+                "name": "prebook"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "shipping_information",
+            "label": "Shipping information",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Service type",
+                "optional": true,
+                "type": "string",
+                "name": "service_type"
+              },
+              {
+                "control_type": "text",
+                "label": "Service code",
+                "optional": true,
+                "type": "string",
+                "name": "service_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Carrier code",
+                "optional": true,
+                "type": "string",
+                "name": "carrier_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Carrier friendly name",
+                "optional": true,
+                "type": "string",
+                "name": "carrier_friendly_name"
+              },
+              {
+                "control_type": "number",
+                "label": "Price",
+                "parse_output": "float_conversion",
+                "render_input": "float_conversion",
+                "optional": true,
+                "type": "number",
+                "name": "price"
+              },
+              {
+                "control_type": "number",
+                "label": "Final amount",
+                "parse_output": "float_conversion",
+                "render_input": "float_conversion",
+                "optional": true,
+                "type": "number",
+                "name": "final_amount"
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "total",
+            "control_type": "number",
+            "label": "Total",
+            "optional": true,
+            "render_input": "float_conversion",
+            "parse_output": "float_conversion"
+          },
+          {
+            "type": "array",
+            "name": "shipments",
+            "label": "Shipments",
+            "optional": true,
+            "of": "object",
+            "properties": [
+              {
+                "name": "line_items",
+                "type": "array",
+                "of": "object",
+                "label": "Line items",
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Brand ID",
+                    "optional": true,
+                    "type": "string",
+                    "name": "brand_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Season",
+                    "optional": true,
+                    "type": "string",
+                    "name": "season"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Style number",
+                    "optional": true,
+                    "type": "string",
+                    "name": "style_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Color",
+                    "optional": true,
+                    "type": "string",
+                    "name": "color"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Sizes",
+                    "optional": true,
+                    "type": "string",
+                    "name": "sizes"
+                  }
+                ]
+              },
+              {
+                "control_type": "text",
+                "label": "Type",
+                "optional": true,
+                "type": "string",
+                "name": "type"
+              },
+              {
+                "name": "tracking_numbers",
+                "type": "array",
+                "of": "string",
+                "label": "Tracking numbers",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Status",
+                "optional": true,
+                "type": "string",
+                "name": "status"
+              },
+              {
+                "control_type": "text",
+                "label": "Shipment date",
+                "optional": true,
+                "type": "string",
+                "name": "shipment_date"
+              }
+            ]
+          },
+          {
+            "type": "string",
+            "name": "order_type",
+            "control_type": "text",
+            "label": "Order Type",
+            "optional": false,
+            "custom": true
+          },
+          {
+            "type": "string",
+            "name": "style_number",
+            "control_type": "text",
+            "label": "Style Number",
+            "optional": true,
+            "custom": true
+          },
+          {
+            "type": "string",
+            "name": "credit_card_whitelist",
+            "control_type": "text",
+            "label": "Credit Card Whitelist",
+            "optional": true,
+            "custom": true
+          },
+          {
+            "type": "string",
+            "name": "order_flow_type",
+            "control_type": "text",
+            "label": "Order Flow Type",
+            "optional": true,
+            "custom": true
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "string",
+            "name": "id",
+            "control_type": "text",
+            "label": "Order ID",
+            "optional": false
+          }
+        ],
+        "uuid": "67830270-4f10-49c3-bc58-60267de48ee5"
+      }
+    ],
+    "uuid": "c0fd5f43-412d-4ff4-b520-d90050f43a1f"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "nu_order_connector_594131_1651695621",
+      "account_id": {
+        "zip_name": "nuorder_oxo_sandbox_api.connection.json",
+        "name": "NuORDER OXO - Sandbox API",
+        "folder": "",
+        "custom": true
+      },
+      "skip_validation": false
+    }
+  ]
+}

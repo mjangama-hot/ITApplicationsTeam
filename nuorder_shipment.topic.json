@@ -1,0 +1,142 @@
+{
+  "name": "Nuorder_Shipment",
+  "schema": [
+    {
+      "control_type": "text",
+      "label": "Type",
+      "type": "string",
+      "name": "type",
+      "details": {
+        "real_name": "type"
+      }
+    },
+    {
+      "control_type": "text",
+      "label": "Portal",
+      "name": "portal",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Nuorder order number",
+      "name": "nuorder_order_number",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "name": "tracking_numbers",
+      "type": "array",
+      "of": "string",
+      "label": "Tracking numbers",
+      "details": {
+        "real_name": "tracking_numbers"
+      }
+    },
+    {
+      "name": "line_items",
+      "type": "array",
+      "of": "object",
+      "label": "Line items",
+      "details": {
+        "real_name": "line_items"
+      },
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Style number",
+          "type": "string",
+          "name": "style_number",
+          "details": {
+            "real_name": "style_number"
+          }
+        },
+        {
+          "control_type": "text",
+          "label": "Brand ID",
+          "type": "string",
+          "name": "brand_id",
+          "details": {
+            "real_name": "brand_id"
+          }
+        },
+        {
+          "control_type": "text",
+          "label": "Season",
+          "type": "string",
+          "name": "season",
+          "details": {
+            "real_name": "season"
+          }
+        },
+        {
+          "control_type": "text",
+          "label": "Color",
+          "type": "string",
+          "name": "color",
+          "details": {
+            "real_name": "color"
+          }
+        },
+        {
+          "name": "sizes",
+          "type": "array",
+          "of": "object",
+          "label": "Sizes",
+          "details": {
+            "real_name": "sizes"
+          },
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "Size",
+              "type": "string",
+              "name": "size",
+              "details": {
+                "real_name": "size"
+              }
+            },
+            {
+              "control_type": "number",
+              "label": "Quantity",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "quantity",
+              "details": {
+                "real_name": "quantity"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Suppress emails",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Suppress emails",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "suppress_emails"
+      },
+      "type": "boolean",
+      "name": "suppress_emails",
+      "details": {
+        "real_name": "suppress_emails"
+      }
+    },
+    {
+      "control_type": "text",
+      "label": "Operation",
+      "name": "operation",
+      "type": "string",
+      "optional": false
+    }
+  ]
+}

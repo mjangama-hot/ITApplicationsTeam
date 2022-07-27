@@ -1,0 +1,361 @@
+{
+  "name": "Subscriber_Nuorder_Buyer",
+  "description": "When there is a trigger event, do action",
+  "version": 14,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_pub_sub",
+    "name": "subscribe_to_topic",
+    "as": "4d1e5ded",
+    "title": null,
+    "description": "New <span class=\"provider\">message</span> in <span class=\"provider\">Nuorder_buyer</span> PubSub topic",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "topic_id": "Nuorder_buyer"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "since_offset": "0",
+      "topic_id": {
+        "zip_name": "nuorder_buyer.topic.json",
+        "name": "Nuorder_buyer",
+        "folder": ""
+      }
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "message",
+        "label": "Message",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Comanycode",
+            "name": "comanycode",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Name",
+            "name": "name",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Email",
+            "name": "email",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "title",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Portal",
+            "name": "portal",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Operation",
+            "name": "operation",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "name": "salesrep_array",
+            "type": "array",
+            "of": "object",
+            "label": "Salesrep array",
+            "optional": false,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Salesrep email",
+                "name": "salesrep_email",
+                "optional": false,
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+              "rhs": "HYF",
+              "uuid": "condition-0266e980-7d65-4ed1-98b1-62888a5565e1"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "594f784f",
+            "title": null,
+            "description": "Call <span class=\"provider\">Callable Recipe for HYF Portal -Nuorderbuyer</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "Callable Recipe for HYF Portal -Nuorderbuyer"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "flow_id": {
+                "zip_name": "callable_recipe_for_hyf_portal_nuorderbuyer.recipe.json",
+                "name": "Callable Recipe for HYF Portal -Nuorderbuyer",
+                "folder": ""
+              },
+              "parameters": {
+                "name": "#{_('data.workato_pub_sub.4d1e5ded.message.name')}",
+                "operation": "#{_('data.workato_pub_sub.4d1e5ded.message.operation')}",
+                "company_code": "#{_('data.workato_pub_sub.4d1e5ded.message.comanycode')}",
+                "email": "#{_('data.workato_pub_sub.4d1e5ded.message.email')}",
+                "title": "#{_('data.workato_pub_sub.4d1e5ded.message.title')}",
+                "portal": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+                "salesrep_array": {
+                  "____source": "#{_('data.workato_pub_sub.4d1e5ded.message.salesrep_array')}",
+                  "salesrep_email": "#{_('data.workato_pub_sub.4d1e5ded.message.salesrep_array.first.salesrep_email')}"
+                }
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Parameters",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Company code",
+                    "name": "company_code",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Email",
+                    "name": "email",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Portal",
+                    "name": "portal",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Operation",
+                    "name": "operation",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "name": "salesrep_array",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Salesrep array",
+                    "optional": false,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Salesrep email",
+                        "name": "salesrep_email",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uuid": "5dd954ef-21a5-4ef6-8075-3c1dc1985862",
+            "skip": false
+          }
+        ],
+        "uuid": "c5295ec1-7fe9-4b1c-bcde-4360fbbd21fb"
+      },
+      {
+        "number": 3,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+              "rhs": "OXO",
+              "uuid": "condition-7b62fe48-c538-49d0-b3ae-b1789b318f5c"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 4,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "f40082c0",
+            "title": null,
+            "description": "Call <span class=\"provider\">Callable Recipe for OXO Portal -Nuorderbuyer</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "Callable Recipe for OXO Portal -Nuorderbuyer"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "flow_id": {
+                "zip_name": "callable_recipe_for_oxo_portal_nuorderbuyer.recipe.json",
+                "name": "Callable Recipe for OXO Portal -Nuorderbuyer",
+                "folder": ""
+              },
+              "parameters": {
+                "name": "#{_('data.workato_pub_sub.4d1e5ded.message.name')}",
+                "operation": "#{_('data.workato_pub_sub.4d1e5ded.message.operation')}",
+                "company_code": "#{_('data.workato_pub_sub.4d1e5ded.message.comanycode')}",
+                "email": "#{_('data.workato_pub_sub.4d1e5ded.message.email')}",
+                "title": "#{_('data.workato_pub_sub.4d1e5ded.message.title')}",
+                "portal": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+                "salesrep_array": {
+                  "____source": "#{_('data.workato_pub_sub.4d1e5ded.message.salesrep_array')}",
+                  "salesrep_email": "#{_('data.workato_pub_sub.4d1e5ded.message.salesrep_array.first.salesrep_email')}"
+                }
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Parameters",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Company code",
+                    "name": "company_code",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Email",
+                    "name": "email",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Portal",
+                    "name": "portal",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Operation",
+                    "name": "operation",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "name": "salesrep_array",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Salesrep array",
+                    "optional": false,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Salesrep email",
+                        "name": "salesrep_email",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uuid": "0e473e08-01e8-4899-b251-e7101ecda15e"
+          }
+        ],
+        "uuid": "5fa7744c-e8cf-42e1-abad-213c4990ce56"
+      }
+    ],
+    "uuid": "e3795654-9909-4152-b6d1-7fc2ff0544ae"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_pub_sub",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "name": "Subscriber- Nuorder_Shipment",
+  "description": "When there is a trigger event, do action",
+  "version": 18,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_pub_sub",
+    "name": "subscribe_to_topic",
+    "as": "4d1e5ded",
+    "title": null,
+    "description": "New <span class=\"provider\">message</span> in <span class=\"provider\">Nuorder_Shipment</span> PubSub topic",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "topic_id": "Nuorder_Shipment"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "since_offset": "-3600",
+      "topic_id": {
+        "zip_name": "nuorder_shipment.topic.json",
+        "name": "Nuorder_Shipment",
+        "folder": ""
+      }
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "message",
+        "label": "Message",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Type",
+            "details": {
+              "real_name": "type"
+            },
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Portal",
+            "name": "portal",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Nuorder order number",
+            "name": "nuorder_order_number",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "name": "tracking_numbers",
+            "type": "array",
+            "of": "string",
+            "label": "Tracking numbers",
+            "details": {
+              "real_name": "tracking_numbers"
+            }
+          },
+          {
+            "name": "line_items",
+            "type": "array",
+            "of": "object",
+            "label": "Line items",
+            "details": {
+              "real_name": "line_items"
+            },
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Style number",
+                "details": {
+                  "real_name": "style_number"
+                },
+                "name": "style_number",
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Brand ID",
+                "details": {
+                  "real_name": "brand_id"
+                },
+                "name": "brand_id",
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Season",
+                "details": {
+                  "real_name": "season"
+                },
+                "name": "season",
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Color",
+                "details": {
+                  "real_name": "color"
+                },
+                "name": "color",
+                "type": "string"
+              },
+              {
+                "name": "sizes",
+                "type": "array",
+                "of": "object",
+                "label": "Sizes",
+                "details": {
+                  "real_name": "sizes"
+                },
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Size",
+                    "details": {
+                      "real_name": "size"
+                    },
+                    "name": "size",
+                    "type": "string"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Quantity",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "quantity"
+                    },
+                    "name": "quantity",
+                    "type": "number"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "control_type": "text",
+            "label": "Suppress emails",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "control_type": "text",
+              "label": "Suppress emails",
+              "name": "suppress_emails",
+              "toggle_hint": "Use custom value",
+              "type": "boolean"
+            },
+            "details": {
+              "real_name": "suppress_emails"
+            },
+            "name": "suppress_emails",
+            "type": "boolean"
+          },
+          {
+            "control_type": "text",
+            "label": "Operation",
+            "name": "operation",
+            "optional": false,
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+              "rhs": "HYF",
+              "uuid": "condition-0266e980-7d65-4ed1-98b1-62888a5565e1"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "594f784f",
+            "title": null,
+            "description": "Call <span class=\"provider\">Callable Recipe for HYF Portal -NuorderShipment</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "Callable Recipe for HYF Portal -NuorderShipment"
+            },
+            "toggleCfg": {
+              "parameters.suppress_emails": true
+            },
+            "input": {
+              "flow_id": {
+                "zip_name": "callable_recipe_for_hyf_portal_nuordershipment.recipe.json",
+                "name": "Callable Recipe for HYF Portal -NuorderShipment",
+                "folder": ""
+              },
+              "parameters": {
+                "type": "#{_('data.workato_pub_sub.4d1e5ded.message.type')}",
+                "tracking_numbers": "#{_('data.workato_pub_sub.4d1e5ded.message.tracking_numbers')}",
+                "line_items": {
+                  "____source": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items')}",
+                  "brand_id": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.brand_id')}",
+                  "season": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.season')}",
+                  "style_number": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.style_number')}",
+                  "color": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.color')}",
+                  "sizes": {
+                    "size": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.sizes.first.size')}",
+                    "quantity": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.sizes.first.quantity')}"
+                  }
+                },
+                "suppress_emails": "#{_('data.workato_pub_sub.4d1e5ded.message.suppress_emails')}",
+                "nuord_order_number": "#{_('data.workato_pub_sub.4d1e5ded.message.nuorder_order_number')}"
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Parameters",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Type",
+                    "type": "string",
+                    "name": "type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Nuord order number",
+                    "name": "nuord_order_number",
+                    "type": "string",
+                    "optional": false
+                  },
+                  {
+                    "name": "tracking_numbers",
+                    "type": "array",
+                    "of": "string",
+                    "label": "Tracking numbers"
+                  },
+                  {
+                    "name": "line_items",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Line items",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Brand ID",
+                        "type": "string",
+                        "name": "brand_id"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Season",
+                        "type": "string",
+                        "name": "season"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Style number",
+                        "type": "string",
+                        "name": "style_number"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Color",
+                        "type": "string",
+                        "name": "color"
+                      },
+                      {
+                        "name": "sizes",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Sizes",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "Size",
+                            "type": "string",
+                            "name": "size"
+                          },
+                          {
+                            "control_type": "number",
+                            "label": "Quantity",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "quantity"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Suppress emails",
+                    "render_input": {
+                    },
+                    "parse_output": {
+                    },
+                    "toggle_hint": "Select from option list",
+                    "toggle_field": {
+                      "label": "Suppress emails",
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "type": "boolean",
+                      "name": "suppress_emails"
+                    },
+                    "type": "boolean",
+                    "name": "suppress_emails"
+                  }
+                ]
+              }
+            ],
+            "visible_config_fields": [
+              "flow_id",
+              "parameters",
+              "parameters.style_number",
+              "parameters.season",
+              "parameters.color",
+              "parameters.name",
+              "parameters.brand_id",
+              "parameters.size",
+              "parameters.cancelled",
+              "parameters.archived",
+              "parameters.active",
+              "parameters.Portal",
+              "parameters.operation",
+              "parameters.sizes",
+              "parameters.sizes.size",
+              "parameters.sizes.Units_Per_Pack",
+              "parameters.sizes.UPC",
+              "parameters.sizes.Ean",
+              "parameters.unit_weight",
+              "parameters.volume_uom",
+              "parameters.unit_dims",
+              "parameters.unit_volume",
+              "parameters.unit_width",
+              "parameters.unit_length",
+              "parameters.retail_packaging",
+              "parameters.finish_series",
+              "parameters.warranty_period",
+              "parameters.cost_category_tariff_code",
+              "parameters.cap_style",
+              "parameters.ip_gtin",
+              "parameters.case_gtin",
+              "parameters.item_status",
+              "parameters.units_per_pack",
+              "parameters.product_size",
+              "parameters.brand_name",
+              "parameters.US",
+              "parameters.canada",
+              "parameters.emea",
+              "parameters.latam_apac",
+              "parameters.us_target_launch_date",
+              "parameters.ca_target_launch_date",
+              "parameters.emea_target_launch_date",
+              "parameters.latam_apac_target_launch_date",
+              "parameters.us_end_of_life",
+              "parameters.ca_end_of_life",
+              "parameters.emea_end_of_life",
+              "parameters.latam_apac_end_of_life",
+              "parameters.item_subtype",
+              "parameters.item_sub_Sub_type",
+              "parameters.merch_collection",
+              "parameters.marketing_flag",
+              "parameters.packaging",
+              "parameters.country_of_origin",
+              "parameters.division",
+              "parameters.category",
+              "parameters.sub_category",
+              "parameters.disabled",
+              "parameters.unit_height"
+            ],
+            "uuid": "5dd954ef-21a5-4ef6-8075-3c1dc1985862"
+          }
+        ],
+        "uuid": "c5295ec1-7fe9-4b1c-bcde-4360fbbd21fb"
+      },
+      {
+        "number": 3,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+              "rhs": "OXO",
+              "uuid": "condition-7b62fe48-c538-49d0-b3ae-b1789b318f5c"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 4,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "1733b517",
+            "title": null,
+            "description": "Call <span class=\"provider\">Callable Recipe for OXO Portal -NuorderShipment</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "Callable Recipe for OXO Portal -NuorderShipment"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "flow_id": "2680498",
+              "parameters": {
+                "Shipment": {
+                  "type": "#{_('data.workato_pub_sub.4d1e5ded.message.type')}",
+                  "trackingnumbers": "#{_('data.workato_pub_sub.4d1e5ded.message.tracking_numbers')}",
+                  "line_items": {
+                    "____source": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items')}",
+                    "brand_id": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.brand_id')}",
+                    "season": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.season')}",
+                    "style_number": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.style_number')}",
+                    "color": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.color')}"
+                  },
+                  "sizes": {
+                    "size": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.sizes.first.size')}",
+                    "quantity": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items.first.sizes.first.quantity')}"
+                  },
+                  "operation": "#{_('data.workato_pub_sub.4d1e5ded.message.operation')}",
+                  "portal": "#{_('data.workato_pub_sub.4d1e5ded.message.portal')}",
+                  "nuorder_number": "#{_('data.workato_pub_sub.4d1e5ded.message.nuorder_order_number')}",
+                  "____source": "#{_('data.workato_pub_sub.4d1e5ded.message.line_items')}"
+                }
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Parameters",
+                "properties": [
+                  {
+                    "name": "Shipment",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Shipment",
+                    "details": {
+                      "real_name": "Shipment"
+                    },
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "type",
+                        "type": "string",
+                        "name": "type",
+                        "details": {
+                          "real_name": "type"
+                        },
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "nuorder_number",
+                        "type": "string",
+                        "name": "nuorder_number",
+                        "details": {
+                          "real_name": "type"
+                        },
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "trackingnumbers",
+                        "type": "string",
+                        "name": "trackingnumbers",
+                        "details": {
+                          "real_name": "trackingnumbers"
+                        },
+                        "optional": false
+                      },
+                      {
+                        "name": "line_items",
+                        "type": "array",
+                        "of": "object",
+                        "label": "line_items",
+                        "details": {
+                          "real_name": "line_items"
+                        },
+                        "optional": false,
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "brand_id",
+                            "type": "string",
+                            "name": "brand_id",
+                            "details": {
+                              "real_name": "brand_id"
+                            },
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "season",
+                            "type": "string",
+                            "name": "season",
+                            "details": {
+                              "real_name": "season"
+                            },
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "style_number",
+                            "type": "string",
+                            "name": "style_number",
+                            "details": {
+                              "real_name": "style_number"
+                            },
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "color",
+                            "type": "string",
+                            "name": "color",
+                            "details": {
+                              "real_name": "color"
+                            },
+                            "optional": false
+                          }
+                        ]
+                      },
+                      {
+                        "name": "sizes",
+                        "type": "array",
+                        "of": "object",
+                        "label": "sizes",
+                        "details": {
+                          "real_name": "sizes"
+                        },
+                        "optional": false,
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "size",
+                            "type": "string",
+                            "name": "size",
+                            "details": {
+                              "real_name": "size"
+                            },
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "quantity",
+                            "type": "string",
+                            "name": "quantity",
+                            "details": {
+                              "real_name": "quantity"
+                            },
+                            "optional": false
+                          }
+                        ]
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "type": "string",
+                        "name": "operation",
+                        "details": {
+                          "real_name": "operation"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Portal",
+                        "type": "string",
+                        "name": "portal",
+                        "details": {
+                          "real_name": "portal"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uuid": "fe320cf5-20ad-4b95-a10b-0ef0bdab3d28",
+            "skip": true
+          }
+        ],
+        "uuid": "5fa7744c-e8cf-42e1-abad-213c4990ce56"
+      }
+    ],
+    "uuid": "e3795654-9909-4152-b6d1-7fc2ff0544ae"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_pub_sub",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

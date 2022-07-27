@@ -1,0 +1,185 @@
+{
+  "name": "HYF - List Approved Orders",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 9,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "0a9e04c6",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> on a <span class=\"provider\">specified schedule</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "nu_order_connector_594131_1651695621",
+        "name": "custom_action",
+        "as": "d19f8f5e",
+        "title": null,
+        "description": "<span class=\"provider\">List Approved Orders</span> in <span class=\"provider\">NuORDER</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "action_name": "List Approved Orders",
+          "verb": "get",
+          "response_type": "json",
+          "path": "orders/approved/list"
+        },
+        "extended_input_schema": [
+          {
+            "type": "string",
+            "name": "path",
+            "control_type": "text",
+            "label": "Path",
+            "hint": "Base URI is <b>https://sandbox1.nuorder.com/api/api/</b> - path will be appended to this URI. Use absolute URI to override this base URI.",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "response_type",
+            "control_type": "select",
+            "label": "Response type",
+            "default": "json",
+            "sticky": false,
+            "pick_list": [
+              [
+                "JSON response",
+                "json"
+              ],
+              [
+                "Raw response",
+                "raw"
+              ]
+            ],
+            "optional": true,
+            "extends_schema": true
+          },
+          {
+            "type": "object",
+            "name": "input",
+            "control_type": "form-schema-builder",
+            "label": "Request URL parameters",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "sticky": true,
+                "extends_schema": true,
+                "optional": true,
+                "type": "string",
+                "name": "schema"
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "name": "request_headers",
+            "control_type": "key_value",
+            "label": "Request headers",
+            "sticky": false,
+            "optional": true,
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Key",
+                "optional": true,
+                "type": "string",
+                "name": "key"
+              },
+              {
+                "control_type": "text",
+                "label": "Value",
+                "optional": true,
+                "type": "string",
+                "name": "value"
+              }
+            ],
+            "extends_schema": true
+          },
+          {
+            "type": "string",
+            "name": "output",
+            "control_type": "schema-designer",
+            "label": "Response body",
+            "sticky": true,
+            "optional": true,
+            "extends_schema": true,
+            "schema_neutral": true
+          },
+          {
+            "type": "string",
+            "name": "response_headers",
+            "control_type": "schema-designer",
+            "label": "Response headers",
+            "sticky": false,
+            "optional": true,
+            "extends_schema": true,
+            "schema_neutral": true
+          }
+        ],
+        "uuid": "4c2ebda3-1ddf-4c7f-88dc-f6a70808f908"
+      }
+    ],
+    "uuid": "fbc8f6ac-d0ee-4f4c-963f-5b1c0f0a075d"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "nu_order_connector_594131_1651695621",
+      "account_id": {
+        "zip_name": "nuorder_hyf_sandbox_api.connection.json",
+        "name": "NuOrder HYF - Sandbox API",
+        "folder": "",
+        "custom": true
+      },
+      "skip_validation": false
+    }
+  ]
+}

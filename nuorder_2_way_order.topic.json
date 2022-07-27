@@ -1,0 +1,544 @@
+{
+  "name": "NuOrder - 2 Way Order ",
+  "schema": [
+    {
+      "control_type": "text",
+      "label": "ORDER SEQ ID",
+      "name": "ORDER_SEQ_ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ERP ORDER NUMBER",
+      "name": "ERP_ORDER_NUMBER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORDER NUMBER",
+      "name": "ORDER_NUMBER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORDER DATE",
+      "name": "ORDER_DATE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "FLOW STATUS CODE",
+      "name": "FLOW_STATUS_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "HEADERSHIP DATE START",
+      "name": "HEADERSHIP_DATE_START",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "HEADERSHIP DATE END",
+      "name": "HEADERSHIP_DATE_END",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIP DATE START",
+      "name": "SHIP_DATE_START",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIP DATE END",
+      "name": "SHIP_DATE_END",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BUYER",
+      "name": "BUYER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CUSTOMER CODE",
+      "name": "CUSTOMER_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SALES REP",
+      "name": "SALES_REP",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CURRENCY CODE",
+      "name": "CURRENCY_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORDER TOTAL",
+      "name": "ORDER_TOTAL",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "LINE ITEMS TOTAL",
+      "name": "LINE_ITEMS_TOTAL",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SERVICE TYPE",
+      "name": "SERVICE_TYPE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "FINAL AMOUNT",
+      "name": "FINAL_AMOUNT",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ITEM NUMBER",
+      "name": "ITEM_NUMBER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "COLOR",
+      "name": "COLOR",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "STYLE NUMBER",
+      "name": "STYLE_NUMBER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "UPC",
+      "name": "UPC",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "COLOR CODE",
+      "name": "COLOR_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SIZEA",
+      "name": "SIZEA",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "QUANTITY",
+      "name": "QUANTITY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PRICE PER",
+      "name": "PRICE_PER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "DISCOUNT",
+      "name": "DISCOUNT",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "FREIGHT",
+      "name": "FREIGHT",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "TAX",
+      "name": "TAX",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORIGINAL PRICE",
+      "name": "ORIGINAL_PRICE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PAYMENT TERMS",
+      "name": "PAYMENT_TERMS",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIP TO ORG ID",
+      "name": "SHIP_TO_ORG_ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING LINE 1",
+      "name": "SHIPPING_LINE1",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING LINE 2",
+      "name": "SHIPPING_LINE2",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING LINE 3",
+      "name": "SHIPPING_LINE3",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING LINE 4",
+      "name": "SHIPPING_LINE4",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING CITY",
+      "name": "SHIPPING_CITY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING STATE",
+      "name": "SHIPPING_STATE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING ZIP",
+      "name": "SHIPPING_ZIP",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING COUNTRY",
+      "name": "SHIPPING_COUNTRY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SHIPPING CODE",
+      "name": "SHIPPING_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILL TO ORG ID",
+      "name": "BILL_TO_ORG_ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING LINE 1",
+      "name": "BILLING_LINE1",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING LINE 2",
+      "name": "BILLING_LINE2",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING LINE 3",
+      "name": "BILLING_LINE3",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING LINE 4",
+      "name": "BILLING_LINE4",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING CITY",
+      "name": "BILLING_CITY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING STATE",
+      "name": "BILLING_STATE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING ZIP",
+      "name": "BILLING_ZIP",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING COUNTRY",
+      "name": "BILLING_COUNTRY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BILLING CODE",
+      "name": "BILLING_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CUSTOMER PO NUMBER",
+      "name": "CUSTOMER_PO_NUMBER",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "LINE PRICE LISTID",
+      "name": "LINE_PRICE_LISTID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "LINE PRICE LIST",
+      "name": "LINE_PRICE_LIST",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "HEADER PRICE LISTID",
+      "name": "HEADER_PRICE_LISTID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "HEADER PRICE LIST",
+      "name": "HEADER_PRICE_LIST",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORG ID",
+      "name": "ORG_ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORDER SOURCE",
+      "name": "ORDER_SOURCE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORDER TYPE",
+      "name": "ORDER_TYPE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "NUORDER ORDER TYPE",
+      "name": "NUORDER_ORDER_TYPE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "LINE ITEM SIZE QUANTITY",
+      "name": "LINE_ITEM_SIZE_QUANTITY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "REP EMAIL",
+      "name": "REP_EMAIL",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BUYER EMAIL",
+      "name": "BUYER_EMAIL",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "BRAND ID",
+      "name": "BRAND_ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SEASON",
+      "name": "SEASON",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PREBOOK",
+      "name": "PREBOOK",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "NOTES",
+      "name": "NOTES",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "SERVICE CODE",
+      "name": "SERVICE_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CARRRIER CODE",
+      "name": "CARRIER_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CARRIER FRIENDLY NAME",
+      "name": "CARRIER_FRIENDLY_NAME",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ORG CODE",
+      "name": "ORG_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PORTAL",
+      "name": "PORTAL",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "LAST UPDATE DATE",
+      "name": "LAST_UPDATE_DATE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "LAST UPDATED BY",
+      "name": "LAST_UPDATED_BY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CREATION DATE",
+      "name": "CREATION_DATE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CREATED BY",
+      "name": "CREATED_BY",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "OPERATION",
+      "name": "OPERATION",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "IS PROCESSED",
+      "name": "IS_PROCESSED",
+      "type": "string",
+      "optional": false
+    }
+  ]
+}

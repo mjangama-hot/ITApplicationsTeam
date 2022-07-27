@@ -1,0 +1,62 @@
+{
+  "name": "Nuorder_buyer",
+  "schema": [
+    {
+      "control_type": "text",
+      "label": "Comanycode",
+      "name": "comanycode",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Name",
+      "name": "name",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Email",
+      "name": "email",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "title",
+      "type": "string",
+      "name": "title"
+    },
+    {
+      "control_type": "text",
+      "label": "Portal",
+      "name": "portal",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Operation",
+      "name": "operation",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "name": "salesrep_array",
+      "type": "array",
+      "of": "object",
+      "label": "Salesrep array",
+      "optional": false,
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Salesrep email",
+          "name": "salesrep_email",
+          "type": "string",
+          "optional": false
+        }
+      ]
+    }
+  ]
+}

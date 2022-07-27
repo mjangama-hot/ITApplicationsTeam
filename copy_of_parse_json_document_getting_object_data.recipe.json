@@ -1,0 +1,734 @@
+{
+  "name": "Copy of  parse JSON document_Getting_object_data",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 3,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "3da155e9",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> every 5 minutes",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "json_parser",
+        "name": "parse_json",
+        "as": "a5d58c2c",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "sample_document": "{\n\t\"parameters\": {\n\t\t\"order_number\": \"1234567890000001\",\n\t\t\"external_id\": \"WKT_ORDER_1234567890000001\",\n\t\t\"currency_code\": \"USD\",\n\t\t\"line_items\": [\n\t\t\t{\n\t\t\t\t\"product\": {\n\t\t\t\t\t\"_id\": \"624578f08baeb4e888a621f2\",\n\t\t\t\t\t\"style_number\": \"A396\",\n\t\t\t\t\t\"color\": \"ALL WHITE\",\n\t\t\t\t\t\"color_code\": \"blind\",\n\t\t\t\t\t\"brand_id\": \"172AK061712-001\",\n\t\t\t\t\t\"season\": \"SPRING/SUMMER\"\n\t\t\t\t},\n\t\t\t\t\"ship_start\": \"2022-05-02T00:00:00.000000+00:00\",\n\t\t\t\t\"ship_end\": \"2022-05-03T00:00:00.000000+00:00\",\n\t\t\t\t\"sizes\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"size\": \"OSA1\",\n\t\t\t\t\t\t\"quantity\": 50,\n\t\t\t\t\t\t\"price\": 250,\n\t\t\t\t\t\t\"original_price\": 280\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"size\": \"OSA1\",\n\t\t\t\t\t\t\"quantity\": 50,\n\t\t\t\t\t\t\"price\": 250,\n\t\t\t\t\t\t\"original_price\": 280\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"discount\": 15,\n\t\t\t\t\"notes\": \"[NUO] TEST-REC003 Create record Order\",\n\t\t\t\t\"prebook\": \"false\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"product\": {\n\t\t\t\t\t\"_id\": \"624578f08baeb4e888a621f2\",\n\t\t\t\t\t\"style_number\": \"A396\",\n\t\t\t\t\t\"color\": \"ALL BLACK\",\n\t\t\t\t\t\"color_code\": \"blind\",\n\t\t\t\t\t\"brand_id\": \"172AK061712-001\",\n\t\t\t\t\t\"season\": \"SPRING/SUMMER\"\n\t\t\t\t},\n\t\t\t\t\"ship_start\": \"2022-05-02T00:00:00.000000+00:00\",\n\t\t\t\t\"ship_end\": \"2022-05-03T00:00:00.000000+00:00\",\n\t\t\t\t\"sizes\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"size\": \"OSA1\",\n\t\t\t\t\t\t\"quantity\": 20,\n\t\t\t\t\t\t\"price\": 150,\n\t\t\t\t\t\t\"original_price\": 180\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"discount\": 15,\n\t\t\t\t\"notes\": \"[NUO] TEST-REC003 Create record Order\",\n\t\t\t\t\"prebook\": \"false\"\n\t\t\t}\n\t\t],\n\t\t\"customer_po_number\": \"PO_78891\",\n\t\t\"status\": \"approved\",\n\t\t\"discount\": 20,\n\t\t\"notes\": \"[NUO] TEST-REC003 Create record Order\",\n\t\t\"billing_address\": {\n\t\t\t\"line_1\": \"2664 Agriculture Lane\",\n\t\t\t\"city\": \"Herndon\",\n\t\t\t\"state\": \"West Virginia\",\n\t\t\t\"zip\": \"22090\",\n\t\t\t\"country\": \"US\"\n\t\t},\n\t\t\"shipping_address\": {\n\t\t\t\"line_1\": \"2664 Agriculture Lane\",\n\t\t\t\"city\": \"Herndon\",\n\t\t\t\"state\": \"West Virginia\",\n\t\t\t\"zip\": \"22090\",\n\t\t\t\"country\": \"US\"\n\t\t},\n\t\t\"retailer\": {\n\t\t\t\"retailer_code\": \"WORKATO2\",\n\t\t\t\"buyer_email\": \"john@yahoo.com\",\n\t\t\t\"_id\": \"6246ede0f527410fb24d4379\",\n\t\t\t\"retailer_name\": \"workato 2\",\n\t\t\t\"buyer_name\": \"John\"\n\t\t},\n\t\t\"order_type\": \"REGL\",\n\t\t\"total\": 28250,\n\t\t\"style_number\": \"A396\",\n\t\t\"order_flow_type\": \"immediate\",\n\t\t\"shipping_information\": {\n\t\t\t\"service_type\": \"USPS Priority Mail\",\n\t\t\t\"service_code\": \"uspsPriorityMail\",\n\t\t\t\"carrier_code\": \"1234\",\n\t\t\t\"carrier_friendly_name\": \"United States Postal Service\",\n\t\t\t\"price\": 250,\n\t\t\t\"final_amount\": 250\n\t\t},\n\t\t\"rep_code\": \"101\",\n\t\t\"rep_email\": \"sales@derrick.com\",\n\t\t\"_id\": \"627228d708c678612ae52dda\",\n\t\t\"split\": \"false\",\n\t\t\"buyer_submitted\": \"false\",\n\t\t\"easy_order_viewed\": \"false\",\n\t\t\"easy_order_ready\": \"false\",\n\t\t\"collaborative_draft\": \"false\",\n\t\t\"edited\": \"false\",\n\t\t\"payment_status\": \"Not Paid\",\n\t\t\"is_drop_ship\": \"false\",\n\t\t\"__uninitiated_order\": \"false\",\n\t\t\"__includes_cancelled\": \"false\",\n\t\t\"__cancelled_units\": 0,\n\t\t\"__cancelled_total\": 0,\n\t\t\"__is_rtp\": \"false\",\n\t\t\"submitted_by\": \"external\",\n\t\t\"schema_id\": \"621e31d02a2df309711035d7\",\n\t\t\"locked\": \"true\",\n\t\t\"modified_on\": \"2022-05-09T16:20:21.159000+00:00\",\n\t\t\"rep_name\": \"Unknown Rep\",\n\t\t\"start_ship\": \"2022-05-02T00:00:00.000000+00:00\",\n\t\t\"end_ship\": \"2022-05-03T00:00:00.000000+00:00\",\n\t\t\"order_group_id\": \"627228d708c67800fee52dd3\",\n\t\t\"creator_name\": \"NuORDER API\",\n\t\t\"additional_percentage\": 0,\n\t\t\"total_quantity\": 120,\n\t\t\"existing_pdf_linesheet\": \"627228d708c678405ae52ddf\",\n\t\t\"admin_pdf\": \"627228d708c6786cea…(truncated here)\"\n\t},\n\t\"Context\": {\n\t\t\"calling_job_id\": 12932926064,\n\t\t\"calling_recipe_id\": 2484641\n\t}\n}",
+          "document": "{\n\t\"parameters\": {\n\t\t\"order_number\": \"1234567890000001\",\n\t\t\"external_id\": \"WKT_ORDER_1234567890000001\",\n\t\t\"currency_code\": \"USD\",\n\t\t\"line_items\": [\n\t\t\t{\n\t\t\t\t\"product\": {\n\t\t\t\t\t\"_id\": \"624578f08baeb4e888a621f2\",\n\t\t\t\t\t\"style_number\": \"A396\",\n\t\t\t\t\t\"color\": \"ALL WHITE\",\n\t\t\t\t\t\"color_code\": \"blind\",\n\t\t\t\t\t\"brand_id\": \"172AK061712-001\",\n\t\t\t\t\t\"season\": \"SPRING/SUMMER\"\n\t\t\t\t},\n\t\t\t\t\"ship_start\": \"2022-05-02T00:00:00.000000+00:00\",\n\t\t\t\t\"ship_end\": \"2022-05-03T00:00:00.000000+00:00\",\n\t\t\t\t\"sizes\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"size\": \"OSA1\",\n\t\t\t\t\t\t\"quantity\": 50,\n\t\t\t\t\t\t\"price\": 250,\n\t\t\t\t\t\t\"original_price\": 280\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"size\": \"OSA1\",\n\t\t\t\t\t\t\"quantity\": 50,\n\t\t\t\t\t\t\"price\": 250,\n\t\t\t\t\t\t\"original_price\": 280\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"discount\": 15,\n\t\t\t\t\"notes\": \"[NUO] TEST-REC003 Create record Order\",\n\t\t\t\t\"prebook\": \"false\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"product\": {\n\t\t\t\t\t\"_id\": \"624578f08baeb4e888a621f2\",\n\t\t\t\t\t\"style_number\": \"A396\",\n\t\t\t\t\t\"color\": \"ALL BLACK\",\n\t\t\t\t\t\"color_code\": \"blind\",\n\t\t\t\t\t\"brand_id\": \"172AK061712-001\",\n\t\t\t\t\t\"season\": \"SPRING/SUMMER\"\n\t\t\t\t},\n\t\t\t\t\"ship_start\": \"2022-05-02T00:00:00.000000+00:00\",\n\t\t\t\t\"ship_end\": \"2022-05-03T00:00:00.000000+00:00\",\n\t\t\t\t\"sizes\": [\n\t\t\t\t\t{\n\t\t\t\t\t\t\"size\": \"OSA1\",\n\t\t\t\t\t\t\"quantity\": 20,\n\t\t\t\t\t\t\"price\": 150,\n\t\t\t\t\t\t\"original_price\": 180\n\t\t\t\t\t}\n\t\t\t\t],\n\t\t\t\t\"discount\": 15,\n\t\t\t\t\"notes\": \"[NUO] TEST-REC003 Create record Order\",\n\t\t\t\t\"prebook\": \"false\"\n\t\t\t}\n\t\t],\n\t\t\"customer_po_number\": \"PO_78891\",\n\t\t\"status\": \"approved\",\n\t\t\"discount\": 20,\n\t\t\"notes\": \"[NUO] TEST-REC003 Create record Order\",\n\t\t\"billing_address\": {\n\t\t\t\"line_1\": \"2664 Agriculture Lane\",\n\t\t\t\"city\": \"Herndon\",\n\t\t\t\"state\": \"West Virginia\",\n\t\t\t\"zip\": \"22090\",\n\t\t\t\"country\": \"US\"\n\t\t},\n\t\t\"shipping_address\": {\n\t\t\t\"line_1\": \"2664 Agriculture Lane\",\n\t\t\t\"city\": \"Herndon\",\n\t\t\t\"state\": \"West Virginia\",\n\t\t\t\"zip\": \"22090\",\n\t\t\t\"country\": \"US\"\n\t\t},\n\t\t\"retailer\": {\n\t\t\t\"retailer_code\": \"WORKATO2\",\n\t\t\t\"buyer_email\": \"john@yahoo.com\",\n\t\t\t\"_id\": \"6246ede0f527410fb24d4379\",\n\t\t\t\"retailer_name\": \"workato 2\",\n\t\t\t\"buyer_name\": \"John\"\n\t\t},\n\t\t\"order_type\": \"REGL\",\n\t\t\"total\": 28250,\n\t\t\"style_number\": \"A396\",\n\t\t\"order_flow_type\": \"immediate\",\n\t\t\"shipping_information\": {\n\t\t\t\"service_type\": \"USPS Priority Mail\",\n\t\t\t\"service_code\": \"uspsPriorityMail\",\n\t\t\t\"carrier_code\": \"1234\",\n\t\t\t\"carrier_friendly_name\": \"United States Postal Service\",\n\t\t\t\"price\": 250,\n\t\t\t\"final_amount\": 250\n\t\t},\n\t\t\"rep_code\": \"101\",\n\t\t\"rep_email\": \"sales@derrick.com\",\n\t\t\"_id\": \"627228d708c678612ae52dda\",\n\t\t\"split\": \"false\",\n\t\t\"buyer_submitted\": \"false\",\n\t\t\"easy_order_viewed\": \"false\",\n\t\t\"easy_order_ready\": \"false\",\n\t\t\"collaborative_draft\": \"false\",\n\t\t\"edited\": \"false\",\n\t\t\"payment_status\": \"Not Paid\",\n\t\t\"is_drop_ship\": \"false\",\n\t\t\"__uninitiated_order\": \"false\",\n\t\t\"__includes_cancelled\": \"false\",\n\t\t\"__cancelled_units\": 0,\n\t\t\"__cancelled_total\": 0,\n\t\t\"__is_rtp\": \"false\",\n\t\t\"submitted_by\": \"external\",\n\t\t\"schema_id\": \"621e31d02a2df309711035d7\",\n\t\t\"locked\": \"true\",\n\t\t\"modified_on\": \"2022-05-09T16:20:21.159000+00:00\",\n\t\t\"rep_name\": \"Unknown Rep\",\n\t\t\"start_ship\": \"2022-05-02T00:00:00.000000+00:00\",\n\t\t\"end_ship\": \"2022-05-03T00:00:00.000000+00:00\",\n\t\t\"order_group_id\": \"627228d708c67800fee52dd3\",\n\t\t\"creator_name\": \"NuORDER API\",\n\t\t\"additional_percentage\": 0,\n\t\t\"total_quantity\": 120,\n\t\t\"existing_pdf_linesheet\": \"627228d708c678405ae52ddf\",\n\t\t\"admin_pdf\": \"627228d708c6786cea…(truncated here)\"\n\t},\n\t\"Context\": {\n\t\t\"calling_job_id\": 12932926064,\n\t\t\"calling_recipe_id\": 2484641\n\t}\n}"
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "document",
+            "label": "Document",
+            "properties": [
+              {
+                "label": "Parameters",
+                "type": "object",
+                "name": "parameters",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Order number",
+                    "type": "string",
+                    "name": "order_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "External ID",
+                    "type": "string",
+                    "name": "external_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Currency code",
+                    "type": "string",
+                    "name": "currency_code"
+                  },
+                  {
+                    "name": "line_items",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Line items",
+                    "properties": [
+                      {
+                        "label": "Product",
+                        "type": "object",
+                        "name": "product",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "ID",
+                            "type": "string",
+                            "name": "_id"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Style number",
+                            "type": "string",
+                            "name": "style_number"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Color",
+                            "type": "string",
+                            "name": "color"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Color code",
+                            "type": "string",
+                            "name": "color_code"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Brand ID",
+                            "type": "string",
+                            "name": "brand_id"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Season",
+                            "type": "string",
+                            "name": "season"
+                          }
+                        ]
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Ship start",
+                        "render_input": "date_time_conversion",
+                        "parse_output": "date_time_conversion",
+                        "type": "date_time",
+                        "name": "ship_start"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Ship end",
+                        "render_input": "date_time_conversion",
+                        "parse_output": "date_time_conversion",
+                        "type": "date_time",
+                        "name": "ship_end"
+                      },
+                      {
+                        "name": "sizes",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Sizes",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "Size",
+                            "type": "string",
+                            "name": "size"
+                          },
+                          {
+                            "control_type": "number",
+                            "label": "Quantity",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "quantity"
+                          },
+                          {
+                            "control_type": "number",
+                            "label": "Price",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "price"
+                          },
+                          {
+                            "control_type": "number",
+                            "label": "Original price",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "original_price"
+                          }
+                        ]
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Discount",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "discount"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Notes",
+                        "type": "string",
+                        "name": "notes"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Prebook",
+                        "type": "string",
+                        "name": "prebook"
+                      }
+                    ]
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Customer po number",
+                    "type": "string",
+                    "name": "customer_po_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "type": "string",
+                    "name": "status"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Discount",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "discount"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Notes",
+                    "type": "string",
+                    "name": "notes"
+                  },
+                  {
+                    "label": "Billing address",
+                    "type": "object",
+                    "name": "billing_address",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Line 1",
+                        "type": "string",
+                        "name": "line_1"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "City",
+                        "type": "string",
+                        "name": "city"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "State",
+                        "type": "string",
+                        "name": "state"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Zip",
+                        "type": "string",
+                        "name": "zip"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Country",
+                        "type": "string",
+                        "name": "country"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Shipping address",
+                    "type": "object",
+                    "name": "shipping_address",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Line 1",
+                        "type": "string",
+                        "name": "line_1"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "City",
+                        "type": "string",
+                        "name": "city"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "State",
+                        "type": "string",
+                        "name": "state"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Zip",
+                        "type": "string",
+                        "name": "zip"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Country",
+                        "type": "string",
+                        "name": "country"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Retailer",
+                    "type": "object",
+                    "name": "retailer",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Retailer code",
+                        "type": "string",
+                        "name": "retailer_code"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Buyer email",
+                        "type": "string",
+                        "name": "buyer_email"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "type": "string",
+                        "name": "_id"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Retailer name",
+                        "type": "string",
+                        "name": "retailer_name"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Buyer name",
+                        "type": "string",
+                        "name": "buyer_name"
+                      }
+                    ]
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Order type",
+                    "type": "string",
+                    "name": "order_type"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Total",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "total"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Style number",
+                    "type": "string",
+                    "name": "style_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Order flow type",
+                    "type": "string",
+                    "name": "order_flow_type"
+                  },
+                  {
+                    "label": "Shipping information",
+                    "type": "object",
+                    "name": "shipping_information",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Service type",
+                        "type": "string",
+                        "name": "service_type"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Service code",
+                        "type": "string",
+                        "name": "service_code"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Carrier code",
+                        "type": "string",
+                        "name": "carrier_code"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Carrier friendly name",
+                        "type": "string",
+                        "name": "carrier_friendly_name"
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Price",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "price"
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Final amount",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "final_amount"
+                      }
+                    ]
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Rep code",
+                    "type": "string",
+                    "name": "rep_code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Rep email",
+                    "type": "string",
+                    "name": "rep_email"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "type": "string",
+                    "name": "_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Split",
+                    "type": "string",
+                    "name": "split"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Buyer submitted",
+                    "type": "string",
+                    "name": "buyer_submitted"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Easy order viewed",
+                    "type": "string",
+                    "name": "easy_order_viewed"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Easy order ready",
+                    "type": "string",
+                    "name": "easy_order_ready"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Collaborative draft",
+                    "type": "string",
+                    "name": "collaborative_draft"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Edited",
+                    "type": "string",
+                    "name": "edited"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Payment status",
+                    "type": "string",
+                    "name": "payment_status"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Is drop ship",
+                    "type": "string",
+                    "name": "is_drop_ship"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Uninitiated order",
+                    "type": "string",
+                    "name": "__uninitiated_order"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Includes cancelled",
+                    "type": "string",
+                    "name": "__includes_cancelled"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Cancelled units",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "__cancelled_units"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Cancelled total",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "__cancelled_total"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Is rtp",
+                    "type": "string",
+                    "name": "__is_rtp"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Submitted by",
+                    "type": "string",
+                    "name": "submitted_by"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Schema ID",
+                    "type": "string",
+                    "name": "schema_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Locked",
+                    "type": "string",
+                    "name": "locked"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Modified on",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "type": "date_time",
+                    "name": "modified_on"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Rep name",
+                    "type": "string",
+                    "name": "rep_name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Start ship",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "type": "date_time",
+                    "name": "start_ship"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "End ship",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "type": "date_time",
+                    "name": "end_ship"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Order group ID",
+                    "type": "string",
+                    "name": "order_group_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Creator name",
+                    "type": "string",
+                    "name": "creator_name"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Additional percentage",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "additional_percentage"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Total quantity",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "total_quantity"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Existing pdf linesheet",
+                    "type": "string",
+                    "name": "existing_pdf_linesheet"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Admin pdf",
+                    "type": "string",
+                    "name": "admin_pdf"
+                  }
+                ]
+              },
+              {
+                "label": "Context",
+                "type": "object",
+                "name": "Context",
+                "properties": [
+                  {
+                    "control_type": "number",
+                    "label": "Calling job ID",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "calling_job_id"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Calling recipe ID",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "calling_recipe_id"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "uuid": "fbbcb1ba-cc04-4ef7-8293-ebc6cbac0331"
+      },
+      {
+        "number": 2,
+        "provider": "workato_list",
+        "name": "accumulate_list_items",
+        "as": "5c395c6d",
+        "title": "Accumulate items to Product List list",
+        "description": "Accumulate <span class=\"provider\">items</span> to <span class=\"provider\">Product List</span> list",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "name": "Product List",
+          "list_item": {
+            "schema": "[{\"name\":\"product\",\"type\":\"string\",\"optional\":true,\"label\":\"product\",\"control_type\":\"text\"}]",
+            "data": {
+              "product": "=_('data.json_parser.a5d58c2c.document.parameters.line_items').pluck(\"product\")"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "list_items",
+            "label": "Items",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "product",
+                "name": "product",
+                "type": "string",
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "list_item",
+            "control_type": "form-schema-builder",
+            "label": "List item fields",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "label": "Data",
+                "type": "object",
+                "name": "data",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "product",
+                    "name": "product",
+                    "type": "string",
+                    "optional": true
+                  }
+                ]
+              }
+            ],
+            "override": true
+          }
+        ],
+        "visible_config_fields": [
+          "name",
+          "list_item.data.Test",
+          "list_item",
+          "list_item.schema",
+          "list_item.data.product"
+        ],
+        "uuid": "f99c3956-ca81-496c-8c47-f73e30769e25"
+      }
+    ],
+    "uuid": "68037e29-09f2-4683-8be3-cee40736b159"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "json_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_list",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
