@@ -1,0 +1,977 @@
+{
+  "name": "NuOrder_Order_Intake",
+  "schema": [
+    {
+      "control_type": "text",
+      "label": "ID",
+      "type": "string",
+      "name": "_id"
+    },
+    {
+      "control_type": "text",
+      "label": "Split",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Split",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "split"
+      },
+      "type": "boolean",
+      "name": "split"
+    },
+    {
+      "control_type": "text",
+      "label": "Buyer submitted",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Buyer submitted",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "buyer_submitted"
+      },
+      "type": "boolean",
+      "name": "buyer_submitted"
+    },
+    {
+      "control_type": "text",
+      "label": "Easy order viewed",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Easy order viewed",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "easy_order_viewed"
+      },
+      "type": "boolean",
+      "name": "easy_order_viewed"
+    },
+    {
+      "control_type": "text",
+      "label": "Easy order ready",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Easy order ready",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "easy_order_ready"
+      },
+      "type": "boolean",
+      "name": "easy_order_ready"
+    },
+    {
+      "control_type": "text",
+      "label": "Collaborative draft",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Collaborative draft",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "collaborative_draft"
+      },
+      "type": "boolean",
+      "name": "collaborative_draft"
+    },
+    {
+      "control_type": "text",
+      "label": "Edited",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Edited",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "edited"
+      },
+      "type": "boolean",
+      "name": "edited"
+    },
+    {
+      "control_type": "text",
+      "label": "Payment status",
+      "type": "string",
+      "name": "payment_status"
+    },
+    {
+      "control_type": "text",
+      "label": "Is drop ship",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Is drop ship",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "is_drop_ship"
+      },
+      "type": "boolean",
+      "name": "is_drop_ship"
+    },
+    {
+      "control_type": "text",
+      "label": "Uninitiated order",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Uninitiated order",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "__uninitiated_order"
+      },
+      "type": "boolean",
+      "name": "__uninitiated_order"
+    },
+    {
+      "control_type": "text",
+      "label": "Includes cancelled",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Includes cancelled",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "__includes_cancelled"
+      },
+      "type": "boolean",
+      "name": "__includes_cancelled"
+    },
+    {
+      "control_type": "number",
+      "label": "Cancelled units",
+      "parse_output": "float_conversion",
+      "type": "number",
+      "name": "__cancelled_units"
+    },
+    {
+      "control_type": "number",
+      "label": "Cancelled total",
+      "parse_output": "float_conversion",
+      "type": "number",
+      "name": "__cancelled_total"
+    },
+    {
+      "control_type": "text",
+      "label": "Is rtp",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Is rtp",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "__is_rtp"
+      },
+      "type": "boolean",
+      "name": "__is_rtp"
+    },
+    {
+      "control_type": "text",
+      "label": "Creator name",
+      "type": "string",
+      "name": "creator_name"
+    },
+    {
+      "control_type": "text",
+      "label": "Schema ID",
+      "type": "string",
+      "name": "schema_id"
+    },
+    {
+      "name": "line_items",
+      "type": "array",
+      "of": "object",
+      "label": "Line items",
+      "properties": [
+        {
+          "label": "Product",
+          "type": "object",
+          "name": "product",
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "ID",
+              "type": "string",
+              "name": "_id"
+            },
+            {
+              "control_type": "text",
+              "label": "Style number",
+              "type": "string",
+              "name": "style_number"
+            },
+            {
+              "control_type": "text",
+              "label": "Color",
+              "type": "string",
+              "name": "color"
+            },
+            {
+              "control_type": "text",
+              "label": "Color code",
+              "type": "string",
+              "name": "color_code"
+            },
+            {
+              "control_type": "text",
+              "label": "Brand ID",
+              "type": "string",
+              "name": "brand_id"
+            },
+            {
+              "control_type": "text",
+              "label": "Season",
+              "type": "string",
+              "name": "season"
+            }
+          ]
+        },
+        {
+          "control_type": "text",
+          "label": "Ship start",
+          "render_input": "date_time_conversion",
+          "parse_output": "date_time_conversion",
+          "type": "date_time",
+          "name": "ship_start"
+        },
+        {
+          "control_type": "text",
+          "label": "Ship end",
+          "render_input": "date_time_conversion",
+          "parse_output": "date_time_conversion",
+          "type": "date_time",
+          "name": "ship_end"
+        },
+        {
+          "name": "sizes",
+          "type": "array",
+          "of": "object",
+          "label": "Sizes",
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "Size",
+              "type": "string",
+              "name": "size"
+            },
+            {
+              "control_type": "number",
+              "label": "Quantity",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "quantity"
+            },
+            {
+              "control_type": "number",
+              "label": "Price",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "price"
+            },
+            {
+              "control_type": "number",
+              "label": "Original price",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "original_price"
+            },
+            {
+              "control_type": "text",
+              "label": "Upc",
+              "type": "string",
+              "name": "upc"
+            }
+          ]
+        },
+        {
+          "control_type": "text",
+          "label": "Customization split",
+          "type": "string",
+          "name": "customization_split"
+        },
+        {
+          "control_type": "text",
+          "label": "Warehouse",
+          "type": "string",
+          "name": "warehouse"
+        },
+        {
+          "control_type": "text",
+          "label": "Prebook",
+          "render_input": {
+          },
+          "parse_output": {
+          },
+          "toggle_hint": "Select from option list",
+          "toggle_field": {
+            "label": "Prebook",
+            "control_type": "text",
+            "toggle_hint": "Use custom value",
+            "type": "boolean",
+            "name": "prebook"
+          },
+          "type": "boolean",
+          "name": "prebook"
+        },
+        {
+          "name": "__customizations",
+          "type": "array",
+          "of": "object",
+          "label": "Customizations",
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "ID",
+              "type": "string",
+              "name": "_id"
+            },
+            {
+              "control_type": "text",
+              "label": "Attribute ID",
+              "type": "string",
+              "name": "attribute_id"
+            },
+            {
+              "control_type": "text",
+              "label": "Label",
+              "type": "string",
+              "name": "label"
+            },
+            {
+              "control_type": "text",
+              "label": "Type",
+              "type": "string",
+              "name": "type"
+            },
+            {
+              "control_type": "text",
+              "label": "Value",
+              "type": "string",
+              "name": "value"
+            },
+            {
+              "control_type": "text",
+              "label": "Display value",
+              "type": "string",
+              "name": "display_value"
+            },
+            {
+              "control_type": "number",
+              "label": "Price",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "price"
+            },
+            {
+              "control_type": "text",
+              "label": "Print type",
+              "type": "string",
+              "name": "print_type"
+            },
+            {
+              "name": "child_attributes",
+              "type": "array",
+              "of": "object",
+              "label": "Child attributes",
+              "properties": [
+                {
+                  "control_type": "text",
+                  "label": "ID",
+                  "type": "string",
+                  "name": "_id"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Attribute ID",
+                  "type": "string",
+                  "name": "attribute_id"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Label",
+                  "type": "string",
+                  "name": "label"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Type",
+                  "type": "string",
+                  "name": "type"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Value",
+                  "type": "string",
+                  "name": "value"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Display value",
+                  "type": "string",
+                  "name": "display_value"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Status",
+      "type": "string",
+      "name": "status"
+    },
+    {
+      "control_type": "text",
+      "label": "Currency code",
+      "type": "string",
+      "name": "currency_code"
+    },
+    {
+      "control_type": "text",
+      "label": "Order group ID",
+      "type": "string",
+      "name": "order_group_id"
+    },
+    {
+      "control_type": "number",
+      "label": "Total",
+      "parse_output": "float_conversion",
+      "type": "number",
+      "name": "total"
+    },
+    {
+      "name": "__split_overrides",
+      "type": "array",
+      "of": "object",
+      "label": "Split overrides",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "ID",
+          "type": "string",
+          "name": "_id"
+        },
+        {
+          "control_type": "text",
+          "label": "Key",
+          "type": "string",
+          "name": "key"
+        },
+        {
+          "control_type": "text",
+          "label": "Split po",
+          "type": "string",
+          "name": "split_po"
+        }
+      ]
+    },
+    {
+      "name": "__configure_to_order_items",
+      "type": "array",
+      "of": "object",
+      "label": "Configure to order items",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "ID",
+          "type": "string",
+          "name": "_id"
+        },
+        {
+          "label": "Configure to order line item",
+          "type": "object",
+          "name": "configure_to_order_line_item",
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "Line item ID",
+              "type": "string",
+              "name": "line_item_id"
+            },
+            {
+              "control_type": "text",
+              "label": "Transactional trade item",
+              "type": "string",
+              "name": "transactional_trade_item"
+            },
+            {
+              "control_type": "number",
+              "label": "Requested quantity",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "requested_quantity"
+            },
+            {
+              "control_type": "number",
+              "label": "Net amount",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "net_amount"
+            },
+            {
+              "control_type": "number",
+              "label": "Base item unit price",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "base_item_unit_price"
+            },
+            {
+              "control_type": "number",
+              "label": "Net price",
+              "parse_output": "float_conversion",
+              "type": "number",
+              "name": "net_price"
+            },
+            {
+              "label": "Configure to option",
+              "type": "object",
+              "name": "configure_to_option",
+              "properties": [
+                {
+                  "control_type": "text",
+                  "label": "Option value",
+                  "type": "string",
+                  "name": "option_value"
+                },
+                {
+                  "control_type": "number",
+                  "label": "Requested option quantity",
+                  "parse_output": "float_conversion",
+                  "type": "number",
+                  "name": "requested_option_quantity"
+                },
+                {
+                  "control_type": "number",
+                  "label": "Option unit price",
+                  "parse_output": "float_conversion",
+                  "type": "number",
+                  "name": "option_unit_price"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Option trade item identification",
+                  "type": "string",
+                  "name": "option_trade_item_identification"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Label",
+                  "type": "string",
+                  "name": "label"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Key",
+                  "type": "string",
+                  "name": "key"
+                },
+                {
+                  "control_type": "text",
+                  "label": "Type",
+                  "type": "string",
+                  "name": "type"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Order number",
+      "type": "string",
+      "name": "order_number"
+    },
+    {
+      "control_type": "text",
+      "label": "Modified on",
+      "render_input": "date_time_conversion",
+      "parse_output": "date_time_conversion",
+      "type": "date_time",
+      "name": "modified_on"
+    },
+    {
+      "label": "Retailer",
+      "type": "object",
+      "name": "retailer",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "ID",
+          "type": "string",
+          "name": "_id"
+        },
+        {
+          "control_type": "text",
+          "label": "Retailer name",
+          "type": "string",
+          "name": "retailer_name"
+        },
+        {
+          "control_type": "text",
+          "label": "Retailer code",
+          "type": "string",
+          "name": "retailer_code"
+        },
+        {
+          "control_type": "text",
+          "label": "Buyer name",
+          "type": "string",
+          "name": "buyer_name"
+        },
+        {
+          "control_type": "text",
+          "label": "Buyer email",
+          "type": "string",
+          "name": "buyer_email"
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Order type",
+      "type": "string",
+      "name": "order_type"
+    },
+    {
+      "control_type": "text",
+      "label": "Order flow type",
+      "type": "string",
+      "name": "order_flow_type"
+    },
+    {
+      "label": "Billing address",
+      "type": "object",
+      "name": "billing_address",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Display name",
+          "type": "string",
+          "name": "display_name"
+        },
+        {
+          "control_type": "text",
+          "label": "Line 1",
+          "type": "string",
+          "name": "line_1"
+        },
+        {
+          "control_type": "text",
+          "label": "Country",
+          "type": "string",
+          "name": "country"
+        },
+        {
+          "control_type": "text",
+          "label": "Line 2",
+          "type": "string",
+          "name": "line_2"
+        },
+        {
+          "control_type": "text",
+          "label": "City",
+          "type": "string",
+          "name": "city"
+        },
+        {
+          "control_type": "text",
+          "label": "State",
+          "type": "string",
+          "name": "state"
+        },
+        {
+          "control_type": "text",
+          "label": "Zip",
+          "type": "string",
+          "name": "zip"
+        },
+        {
+          "control_type": "text",
+          "label": "Code",
+          "type": "string",
+          "name": "code"
+        }
+      ]
+    },
+    {
+      "label": "Shipping address",
+      "type": "object",
+      "name": "shipping_address",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Display name",
+          "type": "string",
+          "name": "display_name"
+        },
+        {
+          "control_type": "text",
+          "label": "Line 1",
+          "type": "string",
+          "name": "line_1"
+        },
+        {
+          "control_type": "text",
+          "label": "Country",
+          "type": "string",
+          "name": "country"
+        },
+        {
+          "control_type": "text",
+          "label": "Line 2",
+          "type": "string",
+          "name": "line_2"
+        },
+        {
+          "control_type": "text",
+          "label": "City",
+          "type": "string",
+          "name": "city"
+        },
+        {
+          "control_type": "text",
+          "label": "State",
+          "type": "string",
+          "name": "state"
+        },
+        {
+          "control_type": "text",
+          "label": "Zip",
+          "type": "string",
+          "name": "zip"
+        },
+        {
+          "control_type": "text",
+          "label": "Code",
+          "type": "string",
+          "name": "code",
+          "optional": false
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Submitted by",
+      "type": "string",
+      "name": "submitted_by"
+    },
+    {
+      "control_type": "text",
+      "label": "Customer po number",
+      "type": "string",
+      "name": "customer_po_number"
+    },
+    {
+      "control_type": "number",
+      "label": "Discount",
+      "parse_output": "float_conversion",
+      "type": "number",
+      "name": "discount"
+    },
+    {
+      "control_type": "number",
+      "label": "Additional percentage",
+      "parse_output": "float_conversion",
+      "type": "number",
+      "name": "additional_percentage"
+    },
+    {
+      "control_type": "text",
+      "label": "Notes",
+      "type": "string",
+      "name": "notes"
+    },
+    {
+      "control_type": "text",
+      "label": "Locked",
+      "render_input": {
+      },
+      "parse_output": {
+      },
+      "toggle_hint": "Select from option list",
+      "toggle_field": {
+        "label": "Locked",
+        "control_type": "text",
+        "toggle_hint": "Use custom value",
+        "type": "boolean",
+        "name": "locked"
+      },
+      "type": "boolean",
+      "name": "locked"
+    },
+    {
+      "control_type": "number",
+      "label": "Total quantity",
+      "parse_output": "float_conversion",
+      "type": "number",
+      "name": "total_quantity"
+    },
+    {
+      "control_type": "text",
+      "label": "Style number",
+      "type": "string",
+      "name": "style_number"
+    },
+    {
+      "control_type": "text",
+      "label": "Existing pdf linesheet",
+      "type": "string",
+      "name": "existing_pdf_linesheet"
+    },
+    {
+      "control_type": "text",
+      "label": "Admin pdf",
+      "type": "string",
+      "name": "admin_pdf"
+    },
+    {
+      "control_type": "text",
+      "label": "Manager pdf",
+      "type": "string",
+      "name": "manager_pdf"
+    },
+    {
+      "control_type": "text",
+      "label": "Rep pdf",
+      "type": "string",
+      "name": "rep_pdf"
+    },
+    {
+      "control_type": "text",
+      "label": "Buyer pdf",
+      "type": "string",
+      "name": "buyer_pdf"
+    },
+    {
+      "control_type": "text",
+      "label": "Tech pdf",
+      "type": "string",
+      "name": "tech_pdf"
+    },
+    {
+      "control_type": "text",
+      "label": "Created on",
+      "render_input": "date_time_conversion",
+      "parse_output": "date_time_conversion",
+      "type": "date_time",
+      "name": "created_on"
+    },
+    {
+      "control_type": "text",
+      "label": "Rep name",
+      "type": "string",
+      "name": "rep_name"
+    },
+    {
+      "control_type": "text",
+      "label": "Rep code",
+      "type": "string",
+      "name": "rep_code"
+    },
+    {
+      "control_type": "text",
+      "label": "Rep email",
+      "type": "string",
+      "name": "rep_email"
+    },
+    {
+      "control_type": "text",
+      "label": "Start ship",
+      "render_input": "date_time_conversion",
+      "parse_output": "date_time_conversion",
+      "type": "date_time",
+      "name": "start_ship"
+    },
+    {
+      "control_type": "text",
+      "label": "End ship",
+      "render_input": "date_time_conversion",
+      "parse_output": "date_time_conversion",
+      "type": "date_time",
+      "name": "end_ship"
+    },
+    {
+      "label": "Order header",
+      "name": "order_header",
+      "type": "object",
+      "of": "object",
+      "optional": true,
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Total shipping amount",
+          "type": "string",
+          "name": "total_shipping_amount",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "Total merchandise amount",
+          "type": "string",
+          "name": "total_merchandise_amount",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "Total tax amount",
+          "type": "string",
+          "name": "total_tax_amount",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Portal",
+      "name": "portal",
+      "type": "string",
+      "optional": false
+    }
+  ]
+}

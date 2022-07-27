@@ -1,0 +1,8 @@
+{
+  "title": "NuORDER",
+  "description": null,
+  "logo_file_name": "images.png",
+  "logo_content_type": "image/png",
+  "version_no": 18,
+  "note": "Added Address Line 2 for Company Address object."
+}

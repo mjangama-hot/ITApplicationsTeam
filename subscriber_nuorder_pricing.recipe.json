@@ -1,0 +1,745 @@
+{
+  "name": "Subscriber- Nuorder_Pricing",
+  "description": "When there is a trigger event, do action",
+  "version": 5,
+  "private": true,
+  "concurrency": 2,
+  "code": {
+    "number": 0,
+    "provider": "workato_pub_sub",
+    "name": "subscribe_to_topic",
+    "as": "4d1e5ded",
+    "title": null,
+    "description": "New <span class=\"provider\">message</span> in <span class=\"provider\">Nuorder_Pricing</span> PubSub topic",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "topic_id": "Nuorder_Pricing"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "since_offset": "0",
+      "topic_id": {
+        "zip_name": "nuorder_pricing.topic.json",
+        "name": "Nuorder_Pricing",
+        "folder": ""
+      }
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "message",
+        "label": "Message",
+        "properties": [
+          {
+            "label": "Pricing",
+            "name": "pricing",
+            "type": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Wholesale",
+                "name": "wholesale",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Retail",
+                "name": "retail",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Disabled",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Disabled",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "name": "disabled",
+                  "optional": false,
+                  "type": "boolean"
+                },
+                "name": "disabled",
+                "optional": false,
+                "type": "boolean"
+              },
+              {
+                "control_type": "text",
+                "label": "Template",
+                "name": "template",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Style number",
+                "name": "style_number",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Season",
+                "name": "season",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Color",
+                "name": "color",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "control_type": "text",
+                "label": "Brand ID",
+                "name": "brand_id",
+                "optional": false,
+                "type": "string"
+              },
+              {
+                "name": "data_base_pricing",
+                "type": "array",
+                "of": "object",
+                "label": "data_base_pricing",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Wholesale",
+                    "name": "wholesale",
+                    "type": "string"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Retail",
+                    "name": "retail",
+                    "type": "string"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "start_date",
+                    "name": "start_date",
+                    "type": "string"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "end_date",
+                    "name": "end_date",
+                    "type": "string"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "control_type": "text",
+            "label": "Portal",
+            "name": "Portal",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "Operation",
+            "name": "Operation",
+            "optional": false,
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_pub_sub.4d1e5ded.message.Portal')}",
+              "rhs": "HYF",
+              "uuid": "condition-0266e980-7d65-4ed1-98b1-62888a5565e1"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "594f784f",
+            "title": null,
+            "description": "Call <span class=\"provider\">Callable Recipe for HYF Portal -NuorderPricing</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "Callable Recipe for HYF Portal -NuorderPricing"
+            },
+            "toggleCfg": {
+              "parameters.pricing.disabled": true
+            },
+            "input": {
+              "flow_id": {
+                "zip_name": "callable_recipe_for_hyf_portal_nuorderpricing.recipe.json",
+                "name": "Callable Recipe for HYF Portal -NuorderPricing",
+                "folder": ""
+              },
+              "parameters": {
+                "pricing": {
+                  "wholesale": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.wholesale')}",
+                  "retail": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.retail')}",
+                  "disabled": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.disabled')}",
+                  "date_based_pricing": {
+                    "wholesale": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.wholesale')}",
+                    "retail": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.retail')}",
+                    "start_date": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.start_date')}",
+                    "end_date": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.end_date')}"
+                  },
+                  "template": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.template')}",
+                  "style_number": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.style_number')}",
+                  "season": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.season')}",
+                  "color": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.color')}",
+                  "brand_id": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.brand_id')}",
+                  "operation": "#{_('data.workato_pub_sub.4d1e5ded.message.Operation')}",
+                  "portal": "#{_('data.workato_pub_sub.4d1e5ded.message.Portal')}"
+                }
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Parameters",
+                "properties": [
+                  {
+                    "name": "pricing",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Pricing",
+                    "details": {
+                      "real_name": "pricing"
+                    },
+                    "properties": [
+                      {
+                        "control_type": "number",
+                        "label": "Wholesale",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "wholesale",
+                        "details": {
+                          "real_name": "wholesale"
+                        }
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Retail",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "retail",
+                        "details": {
+                          "real_name": "retail"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Disabled",
+                        "render_input": {
+                        },
+                        "parse_output": {
+                        },
+                        "toggle_hint": "Select from option list",
+                        "toggle_field": {
+                          "label": "Disabled",
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "type": "boolean",
+                          "name": "disabled"
+                        },
+                        "type": "boolean",
+                        "name": "disabled",
+                        "details": {
+                          "real_name": "disabled"
+                        }
+                      },
+                      {
+                        "name": "date_based_pricing",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Date based pricing",
+                        "details": {
+                          "real_name": "date_based_pricing"
+                        },
+                        "properties": [
+                          {
+                            "control_type": "number",
+                            "label": "Wholesale",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "wholesale",
+                            "details": {
+                              "real_name": "wholesale"
+                            }
+                          },
+                          {
+                            "control_type": "number",
+                            "label": "Retail",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "retail",
+                            "details": {
+                              "real_name": "retail"
+                            }
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Start date",
+                            "type": "string",
+                            "name": "start_date",
+                            "details": {
+                              "real_name": "start_date"
+                            }
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "End date",
+                            "type": "string",
+                            "name": "end_date",
+                            "details": {
+                              "real_name": "end_date"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Template",
+                        "type": "string",
+                        "name": "template",
+                        "details": {
+                          "real_name": "template"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Style number",
+                        "type": "string",
+                        "name": "style_number",
+                        "details": {
+                          "real_name": "style_number"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Season",
+                        "type": "string",
+                        "name": "season",
+                        "details": {
+                          "real_name": "season"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Color",
+                        "type": "string",
+                        "name": "color",
+                        "details": {
+                          "real_name": "color"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Brand ID",
+                        "type": "string",
+                        "name": "brand_id",
+                        "details": {
+                          "real_name": "brand_id"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "type": "string",
+                        "name": "operation",
+                        "details": {
+                          "real_name": "operation"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Portal",
+                        "type": "string",
+                        "name": "portal",
+                        "details": {
+                          "real_name": "portal"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "visible_config_fields": [
+              "flow_id",
+              "parameters",
+              "parameters.style_number",
+              "parameters.season",
+              "parameters.color",
+              "parameters.name",
+              "parameters.brand_id",
+              "parameters.size",
+              "parameters.cancelled",
+              "parameters.archived",
+              "parameters.active",
+              "parameters.Portal",
+              "parameters.operation",
+              "parameters.sizes",
+              "parameters.sizes.size",
+              "parameters.sizes.Units_Per_Pack",
+              "parameters.sizes.UPC",
+              "parameters.sizes.Ean",
+              "parameters.unit_weight",
+              "parameters.volume_uom",
+              "parameters.unit_dims",
+              "parameters.unit_volume",
+              "parameters.unit_width",
+              "parameters.unit_length",
+              "parameters.retail_packaging",
+              "parameters.finish_series",
+              "parameters.warranty_period",
+              "parameters.cost_category_tariff_code",
+              "parameters.cap_style",
+              "parameters.ip_gtin",
+              "parameters.case_gtin",
+              "parameters.item_status",
+              "parameters.units_per_pack",
+              "parameters.product_size",
+              "parameters.brand_name",
+              "parameters.US",
+              "parameters.canada",
+              "parameters.emea",
+              "parameters.latam_apac",
+              "parameters.us_target_launch_date",
+              "parameters.ca_target_launch_date",
+              "parameters.emea_target_launch_date",
+              "parameters.latam_apac_target_launch_date",
+              "parameters.us_end_of_life",
+              "parameters.ca_end_of_life",
+              "parameters.emea_end_of_life",
+              "parameters.latam_apac_end_of_life",
+              "parameters.item_subtype",
+              "parameters.item_sub_Sub_type",
+              "parameters.merch_collection",
+              "parameters.marketing_flag",
+              "parameters.packaging",
+              "parameters.country_of_origin",
+              "parameters.division",
+              "parameters.category",
+              "parameters.sub_category",
+              "parameters.disabled",
+              "parameters.unit_height"
+            ],
+            "uuid": "5dd954ef-21a5-4ef6-8075-3c1dc1985862"
+          }
+        ],
+        "uuid": "c5295ec1-7fe9-4b1c-bcde-4360fbbd21fb"
+      },
+      {
+        "number": 3,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_pub_sub.4d1e5ded.message.Portal')}",
+              "rhs": "OXO",
+              "uuid": "condition-7b62fe48-c538-49d0-b3ae-b1789b318f5c"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 4,
+            "provider": "workato_recipe_function",
+            "name": "call_recipe",
+            "as": "1733b517",
+            "title": null,
+            "description": "Call <span class=\"provider\">Callable Recipe for OXO Portal -NuorderPricing</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "flow_id": "Callable Recipe for OXO Portal -NuorderPricing"
+            },
+            "toggleCfg": {
+              "parameters.pricing.disabled": true
+            },
+            "input": {
+              "flow_id": {
+                "zip_name": "callable_recipe_for_oxo_portal_nuorderpricing.recipe.json",
+                "name": "Callable Recipe for OXO Portal -NuorderPricing",
+                "folder": ""
+              },
+              "parameters": {
+                "pricing": {
+                  "wholesale": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.wholesale')}",
+                  "retail": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.retail')}",
+                  "date_based_pricing": {
+                    "wholesale": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.wholesale')}",
+                    "retail": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.retail')}",
+                    "start_date": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.start_date')}",
+                    "end_date": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.end_date')}"
+                  },
+                  "template": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.template')}",
+                  "style_number": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.style_number')}",
+                  "season": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.season')}",
+                  "color": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.color')}",
+                  "brand_id": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.brand_id')}",
+                  "operation": "#{_('data.workato_pub_sub.4d1e5ded.message.Operation')}",
+                  "disabled": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.disabled')}",
+                  "portal": "#{_('data.workato_pub_sub.4d1e5ded.message.Portal')}"
+                }
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Parameters",
+                "properties": [
+                  {
+                    "name": "pricing",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Pricing",
+                    "details": {
+                      "real_name": "pricing"
+                    },
+                    "properties": [
+                      {
+                        "control_type": "number",
+                        "label": "Wholesale",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "wholesale",
+                        "details": {
+                          "real_name": "wholesale"
+                        }
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Retail",
+                        "parse_output": "float_conversion",
+                        "type": "number",
+                        "name": "retail",
+                        "details": {
+                          "real_name": "retail"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Disabled",
+                        "render_input": {
+                        },
+                        "parse_output": {
+                        },
+                        "toggle_hint": "Select from option list",
+                        "toggle_field": {
+                          "label": "Disabled",
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "type": "boolean",
+                          "name": "disabled"
+                        },
+                        "type": "boolean",
+                        "name": "disabled",
+                        "details": {
+                          "real_name": "disabled"
+                        }
+                      },
+                      {
+                        "name": "date_based_pricing",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Date based pricing",
+                        "details": {
+                          "real_name": "date_based_pricing"
+                        },
+                        "properties": [
+                          {
+                            "control_type": "number",
+                            "label": "Wholesale",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "wholesale",
+                            "details": {
+                              "real_name": "wholesale"
+                            }
+                          },
+                          {
+                            "control_type": "number",
+                            "label": "Retail",
+                            "parse_output": "float_conversion",
+                            "type": "number",
+                            "name": "retail",
+                            "details": {
+                              "real_name": "retail"
+                            }
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Start date",
+                            "type": "string",
+                            "name": "start_date",
+                            "details": {
+                              "real_name": "start_date"
+                            }
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "End date",
+                            "type": "string",
+                            "name": "end_date",
+                            "details": {
+                              "real_name": "end_date"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Template",
+                        "type": "string",
+                        "name": "template",
+                        "details": {
+                          "real_name": "template"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Style number",
+                        "type": "string",
+                        "name": "style_number",
+                        "details": {
+                          "real_name": "style_number"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Season",
+                        "type": "string",
+                        "name": "season",
+                        "details": {
+                          "real_name": "season"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Color",
+                        "type": "string",
+                        "name": "color",
+                        "details": {
+                          "real_name": "color"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Brand ID",
+                        "type": "string",
+                        "name": "brand_id",
+                        "details": {
+                          "real_name": "brand_id"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Operation",
+                        "type": "string",
+                        "name": "operation",
+                        "details": {
+                          "real_name": "operation"
+                        }
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Portal",
+                        "type": "string",
+                        "name": "portal",
+                        "details": {
+                          "real_name": "portal"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uuid": "fe320cf5-20ad-4b95-a10b-0ef0bdab3d28",
+            "skip": false
+          }
+        ],
+        "uuid": "5fa7744c-e8cf-42e1-abad-213c4990ce56"
+      }
+    ],
+    "job_report_schema": [
+      {
+        "name": "custom_column_4",
+        "label": "Job ID"
+      },
+      {
+        "name": "custom_column_0",
+        "label": "PriceSheet"
+      },
+      {
+        "name": "custom_column_1",
+        "label": "Item"
+      },
+      {
+        "name": "custom_column_2",
+        "label": "Startdate"
+      },
+      {
+        "name": "custom_column_3",
+        "label": "Enddate"
+      }
+    ],
+    "job_report_config": {
+      "custom_column_4": "#{_('data.workato.job_context.job_id')}",
+      "custom_column_0": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.template')}",
+      "custom_column_1": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.style_number')}",
+      "custom_column_2": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.start_date')}",
+      "custom_column_3": "#{_('data.workato_pub_sub.4d1e5ded.message.pricing.data_base_pricing.first.end_date')}"
+    },
+    "uuid": "e3795654-9909-4152-b6d1-7fc2ff0544ae"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_pub_sub",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

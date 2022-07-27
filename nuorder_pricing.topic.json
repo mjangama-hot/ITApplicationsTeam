@@ -1,0 +1,127 @@
+{
+  "name": "Nuorder_Pricing",
+  "schema": [
+    {
+      "label": "Pricing",
+      "type": "object",
+      "name": "pricing",
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "Wholesale",
+          "name": "wholesale",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "Retail",
+          "name": "retail",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "checkbox",
+          "label": "Disabled",
+          "render_input": {
+          },
+          "parse_output": {
+          },
+          "toggle_hint": "Select from option list",
+          "toggle_field": {
+            "label": "Disabled",
+            "control_type": "text",
+            "toggle_hint": "Use custom value",
+            "name": "disabled",
+            "type": "boolean",
+            "optional": false
+          },
+          "name": "disabled",
+          "type": "boolean",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "Template",
+          "name": "template",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "Style number",
+          "name": "style_number",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "Season",
+          "name": "season",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "Color",
+          "name": "color",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "control_type": "text",
+          "label": "Brand ID",
+          "name": "brand_id",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "data_base_pricing",
+          "type": "array",
+          "of": "object",
+          "label": "data_base_pricing",
+          "properties": [
+            {
+              "control_type": "text",
+              "label": "Wholesale",
+              "type": "string",
+              "name": "wholesale"
+            },
+            {
+              "control_type": "text",
+              "label": "Retail",
+              "type": "string",
+              "name": "retail"
+            },
+            {
+              "control_type": "text",
+              "label": "start_date",
+              "type": "string",
+              "name": "start_date"
+            },
+            {
+              "control_type": "text",
+              "label": "end_date",
+              "type": "string",
+              "name": "end_date"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "Portal",
+      "name": "Portal",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "Operation",
+      "name": "Operation",
+      "type": "string",
+      "optional": false
+    }
+  ]
+}

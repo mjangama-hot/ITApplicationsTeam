@@ -1,0 +1,779 @@
+{
+  "name": "Sample_recipe_on_array_Loop",
+  "description": "When there is a trigger event, do action",
+  "version": 3,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_pub_sub",
+    "name": "subscribe_to_topic",
+    "as": "70021912",
+    "title": null,
+    "description": "New <span class=\"provider\">message</span> in <span class=\"provider\">NuOrder_Order_Intake</span> PubSub topic",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "topic_id": "NuOrder_Order_Intake"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "since_offset": "-3600",
+      "topic_id": {
+        "zip_name": "nuorder_order_intake.topic.json",
+        "name": "NuOrder_Order_Intake",
+        "folder": ""
+      }
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "message",
+        "label": "Message",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "ID",
+            "type": "string",
+            "name": "_id"
+          },
+          {
+            "control_type": "text",
+            "label": "Split",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Split",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "split"
+            },
+            "type": "boolean",
+            "name": "split"
+          },
+          {
+            "control_type": "text",
+            "label": "Buyer submitted",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Buyer submitted",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "buyer_submitted"
+            },
+            "type": "boolean",
+            "name": "buyer_submitted"
+          },
+          {
+            "control_type": "text",
+            "label": "Easy order viewed",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Easy order viewed",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "easy_order_viewed"
+            },
+            "type": "boolean",
+            "name": "easy_order_viewed"
+          },
+          {
+            "control_type": "text",
+            "label": "Easy order ready",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Easy order ready",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "easy_order_ready"
+            },
+            "type": "boolean",
+            "name": "easy_order_ready"
+          },
+          {
+            "control_type": "text",
+            "label": "Collaborative draft",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Collaborative draft",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "collaborative_draft"
+            },
+            "type": "boolean",
+            "name": "collaborative_draft"
+          },
+          {
+            "control_type": "text",
+            "label": "Edited",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Edited",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "edited"
+            },
+            "type": "boolean",
+            "name": "edited"
+          },
+          {
+            "control_type": "text",
+            "label": "Payment status",
+            "type": "string",
+            "name": "payment_status"
+          },
+          {
+            "control_type": "text",
+            "label": "Is drop ship",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Is drop ship",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "is_drop_ship"
+            },
+            "type": "boolean",
+            "name": "is_drop_ship"
+          },
+          {
+            "control_type": "text",
+            "label": "Uninitiated order",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Uninitiated order",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "__uninitiated_order"
+            },
+            "type": "boolean",
+            "name": "__uninitiated_order"
+          },
+          {
+            "control_type": "text",
+            "label": "Includes cancelled",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Includes cancelled",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "__includes_cancelled"
+            },
+            "type": "boolean",
+            "name": "__includes_cancelled"
+          },
+          {
+            "control_type": "number",
+            "label": "Cancelled units",
+            "parse_output": "float_conversion",
+            "type": "number",
+            "name": "__cancelled_units"
+          },
+          {
+            "control_type": "number",
+            "label": "Cancelled total",
+            "parse_output": "float_conversion",
+            "type": "number",
+            "name": "__cancelled_total"
+          },
+          {
+            "control_type": "text",
+            "label": "Is rtp",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Is rtp",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "__is_rtp"
+            },
+            "type": "boolean",
+            "name": "__is_rtp"
+          },
+          {
+            "control_type": "text",
+            "label": "Order number",
+            "type": "string",
+            "name": "order_number"
+          },
+          {
+            "control_type": "text",
+            "label": "External ID",
+            "type": "string",
+            "name": "external_id"
+          },
+          {
+            "control_type": "text",
+            "label": "Currency code",
+            "type": "string",
+            "name": "currency_code"
+          },
+          {
+            "name": "line_items",
+            "type": "array",
+            "of": "object",
+            "label": "Line items",
+            "properties": [
+              {
+                "label": "Product",
+                "type": "object",
+                "name": "product",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "type": "string",
+                    "name": "_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Style number",
+                    "type": "string",
+                    "name": "style_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Color",
+                    "type": "string",
+                    "name": "color"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Color code",
+                    "type": "string",
+                    "name": "color_code"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Brand ID",
+                    "type": "string",
+                    "name": "brand_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Season",
+                    "type": "string",
+                    "name": "season"
+                  }
+                ]
+              },
+              {
+                "control_type": "text",
+                "label": "Ship start",
+                "type": "string",
+                "name": "ship_start"
+              },
+              {
+                "control_type": "text",
+                "label": "Ship end",
+                "type": "string",
+                "name": "ship_end"
+              },
+              {
+                "name": "sizes",
+                "type": "array",
+                "of": "object",
+                "label": "Sizes",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Size",
+                    "type": "string",
+                    "name": "size"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Quantity",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "quantity"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Price",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "price"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Original price",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "original_price"
+                  }
+                ]
+              },
+              {
+                "control_type": "number",
+                "label": "Discount",
+                "parse_output": "float_conversion",
+                "type": "number",
+                "name": "discount"
+              },
+              {
+                "control_type": "text",
+                "label": "Notes",
+                "type": "string",
+                "name": "notes"
+              },
+              {
+                "control_type": "text",
+                "label": "Prebook",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Prebook",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "type": "boolean",
+                  "name": "prebook"
+                },
+                "type": "boolean",
+                "name": "prebook"
+              }
+            ]
+          },
+          {
+            "control_type": "text",
+            "label": "Customer po number",
+            "type": "string",
+            "name": "customer_po_number"
+          },
+          {
+            "control_type": "text",
+            "label": "Status",
+            "type": "string",
+            "name": "status"
+          },
+          {
+            "control_type": "number",
+            "label": "Discount",
+            "parse_output": "float_conversion",
+            "type": "number",
+            "name": "discount"
+          },
+          {
+            "control_type": "text",
+            "label": "Notes",
+            "type": "string",
+            "name": "notes"
+          },
+          {
+            "label": "Billing address",
+            "type": "object",
+            "name": "billing_address",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Line 1",
+                "type": "string",
+                "name": "line_1"
+              },
+              {
+                "control_type": "text",
+                "label": "City",
+                "type": "string",
+                "name": "city"
+              },
+              {
+                "control_type": "text",
+                "label": "State",
+                "type": "string",
+                "name": "state"
+              },
+              {
+                "control_type": "text",
+                "label": "Zip",
+                "type": "string",
+                "name": "zip"
+              },
+              {
+                "control_type": "text",
+                "label": "Country",
+                "type": "string",
+                "name": "country"
+              }
+            ]
+          },
+          {
+            "label": "Shipping address",
+            "type": "object",
+            "name": "shipping_address",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Line 1",
+                "type": "string",
+                "name": "line_1"
+              },
+              {
+                "control_type": "text",
+                "label": "City",
+                "type": "string",
+                "name": "city"
+              },
+              {
+                "control_type": "text",
+                "label": "State",
+                "type": "string",
+                "name": "state"
+              },
+              {
+                "control_type": "text",
+                "label": "Zip",
+                "type": "string",
+                "name": "zip"
+              },
+              {
+                "control_type": "text",
+                "label": "Country",
+                "type": "string",
+                "name": "country"
+              }
+            ]
+          },
+          {
+            "label": "Retailer",
+            "type": "object",
+            "name": "retailer",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "ID",
+                "type": "string",
+                "name": "_id"
+              },
+              {
+                "control_type": "text",
+                "label": "Retailer name",
+                "type": "string",
+                "name": "retailer_name"
+              },
+              {
+                "control_type": "text",
+                "label": "Retailer code",
+                "type": "string",
+                "name": "retailer_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Buyer name",
+                "type": "string",
+                "name": "buyer_name"
+              },
+              {
+                "control_type": "text",
+                "label": "Buyer email",
+                "type": "string",
+                "name": "buyer_email"
+              }
+            ]
+          },
+          {
+            "control_type": "text",
+            "label": "Order type",
+            "type": "string",
+            "name": "order_type"
+          },
+          {
+            "control_type": "text",
+            "label": "Submitted by",
+            "type": "string",
+            "name": "submitted_by"
+          },
+          {
+            "control_type": "text",
+            "label": "Locked",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Locked",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "locked"
+            },
+            "type": "boolean",
+            "name": "locked"
+          },
+          {
+            "control_type": "text",
+            "label": "Schema ID",
+            "type": "string",
+            "name": "schema_id"
+          },
+          {
+            "control_type": "text",
+            "label": "Order group ID",
+            "type": "string",
+            "name": "order_group_id"
+          },
+          {
+            "control_type": "text",
+            "label": "Creator name",
+            "type": "string",
+            "name": "creator_name"
+          },
+          {
+            "control_type": "number",
+            "label": "Additional percentage",
+            "parse_output": "float_conversion",
+            "type": "number",
+            "name": "additional_percentage"
+          },
+          {
+            "control_type": "number",
+            "label": "Total",
+            "parse_output": "float_conversion",
+            "type": "number",
+            "name": "total"
+          },
+          {
+            "control_type": "number",
+            "label": "Total quantity",
+            "parse_output": "float_conversion",
+            "type": "number",
+            "name": "total_quantity"
+          },
+          {
+            "control_type": "text",
+            "label": "Style number",
+            "type": "string",
+            "name": "style_number"
+          },
+          {
+            "control_type": "text",
+            "label": "Existing pdf linesheet",
+            "type": "string",
+            "name": "existing_pdf_linesheet"
+          },
+          {
+            "control_type": "text",
+            "label": "Admin pdf",
+            "type": "string",
+            "name": "admin_pdf"
+          },
+          {
+            "control_type": "text",
+            "label": "Manager pdf",
+            "type": "string",
+            "name": "manager_pdf"
+          },
+          {
+            "control_type": "text",
+            "label": "Rep pdf",
+            "type": "string",
+            "name": "rep_pdf"
+          },
+          {
+            "control_type": "text",
+            "label": "Buyer pdf",
+            "type": "string",
+            "name": "buyer_pdf"
+          },
+          {
+            "control_type": "text",
+            "label": "Tech pdf",
+            "type": "string",
+            "name": "tech_pdf"
+          },
+          {
+            "control_type": "text",
+            "label": "Order flow type",
+            "type": "string",
+            "name": "order_flow_type"
+          },
+          {
+            "control_type": "text",
+            "label": "Created on",
+            "render_input": "date_time_conversion",
+            "parse_output": "date_time_conversion",
+            "type": "date_time",
+            "name": "created_on"
+          },
+          {
+            "control_type": "text",
+            "label": "Modified on",
+            "render_input": "date_time_conversion",
+            "parse_output": "date_time_conversion",
+            "type": "date_time",
+            "name": "modified_on"
+          },
+          {
+            "label": "Shipping information",
+            "type": "object",
+            "name": "shipping_information",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Service type",
+                "type": "string",
+                "name": "service_type"
+              },
+              {
+                "control_type": "text",
+                "label": "Service code",
+                "type": "string",
+                "name": "service_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Carrier code",
+                "type": "string",
+                "name": "carrier_code"
+              },
+              {
+                "control_type": "text",
+                "label": "Carrier friendly name",
+                "type": "string",
+                "name": "carrier_friendly_name"
+              },
+              {
+                "control_type": "number",
+                "label": "Price",
+                "parse_output": "float_conversion",
+                "type": "number",
+                "name": "price"
+              },
+              {
+                "control_type": "number",
+                "label": "Final amount",
+                "parse_output": "float_conversion",
+                "type": "number",
+                "name": "final_amount"
+              }
+            ]
+          },
+          {
+            "control_type": "text",
+            "label": "Rep name",
+            "type": "string",
+            "name": "rep_name"
+          },
+          {
+            "control_type": "text",
+            "label": "Rep code",
+            "type": "string",
+            "name": "rep_code"
+          },
+          {
+            "control_type": "text",
+            "label": "Rep email",
+            "type": "string",
+            "name": "rep_email"
+          },
+          {
+            "control_type": "text",
+            "label": "Start ship",
+            "render_input": "date_time_conversion",
+            "parse_output": "date_time_conversion",
+            "type": "date_time",
+            "name": "start_ship"
+          },
+          {
+            "control_type": "text",
+            "label": "End ship",
+            "render_input": "date_time_conversion",
+            "parse_output": "date_time_conversion",
+            "type": "date_time",
+            "name": "end_ship"
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "as": "b169a83b",
+        "keyword": "foreach",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "repeat_mode": "simple",
+        "clear_scope": "false",
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+            },
+            "uuid": "ef7f3b96-ec90-42ca-8f22-fb31b025b9e1",
+            "skip": true
+          }
+        ],
+        "uuid": "78fef8d0-8fdc-4e39-881b-bfbfb4265cd5",
+        "skip": true
+      }
+    ],
+    "uuid": "c16ebd48-84c3-4dae-8037-e11106df9681"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_pub_sub",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

@@ -1,0 +1,1060 @@
+{
+  "name": "Callable Recipe for HYF Portal -NuorderShipment",
+  "description": "When there is a function call, do action",
+  "version": 24,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "c02ddd82",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"control_type\":\"text\",\"label\":\"Type\",\"type\":\"string\",\"name\":\"type\"},{\"name\":\"nuord_order_number\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"},{\"name\":\"tracking_numbers\",\"type\":\"array\",\"of\":\"string\",\"control_type\":\"text\",\"label\":\"Tracking numbers\"},{\"name\":\"line_items\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Line items\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Brand ID\",\"type\":\"string\",\"name\":\"brand_id\"},{\"control_type\":\"text\",\"label\":\"Season\",\"type\":\"string\",\"name\":\"season\"},{\"control_type\":\"text\",\"label\":\"Style number\",\"type\":\"string\",\"name\":\"style_number\"},{\"control_type\":\"text\",\"label\":\"Color\",\"type\":\"string\",\"name\":\"color\"},{\"name\":\"sizes\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Sizes\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Size\",\"type\":\"string\",\"name\":\"size\"},{\"control_type\":\"number\",\"label\":\"Quantity\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"quantity\"}]}]},{\"control_type\":\"text\",\"label\":\"Suppress emails\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Suppress emails\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"suppress_emails\"},\"type\":\"boolean\",\"name\":\"suppress_emails\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Type",
+            "type": "string",
+            "name": "type"
+          },
+          {
+            "control_type": "text",
+            "label": "Nuord order number",
+            "name": "nuord_order_number",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "name": "tracking_numbers",
+            "type": "array",
+            "of": "string",
+            "label": "Tracking numbers"
+          },
+          {
+            "name": "line_items",
+            "type": "array",
+            "of": "object",
+            "label": "Line items",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Brand ID",
+                "type": "string",
+                "name": "brand_id"
+              },
+              {
+                "control_type": "text",
+                "label": "Season",
+                "type": "string",
+                "name": "season"
+              },
+              {
+                "control_type": "text",
+                "label": "Style number",
+                "type": "string",
+                "name": "style_number"
+              },
+              {
+                "control_type": "text",
+                "label": "Color",
+                "type": "string",
+                "name": "color"
+              },
+              {
+                "name": "sizes",
+                "type": "array",
+                "of": "object",
+                "label": "Sizes",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Size",
+                    "type": "string",
+                    "name": "size"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Quantity",
+                    "parse_output": "float_conversion",
+                    "type": "number",
+                    "name": "quantity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "control_type": "text",
+            "label": "Suppress emails",
+            "render_input": {
+            },
+            "parse_output": {
+            },
+            "toggle_hint": "Select from option list",
+            "toggle_field": {
+              "label": "Suppress emails",
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "type": "boolean",
+              "name": "suppress_emails"
+            },
+            "type": "boolean",
+            "name": "suppress_emails"
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "workato_pub_sub",
+            "name": "publish_to_topic",
+            "as": "8833fc6e",
+            "title": null,
+            "description": "Publish <span class=\"provider\">message</span> to <span class=\"provider\">AOF | PS-001 | AOF_Topic</span> PubSub topic",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "topic_id": "AOF | PS-001 | AOF_Topic"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "topic_id": "11336",
+              "message": {
+                "errorHandlingData": {
+                  "Status": "Success",
+                  "LOB": "NuorderItem Shipment  for HYF Portal",
+                  "jobDetails": {
+                    "identifier": "BrandId : #{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.line_items.first.brand_id')}",
+                    "transactionType": "INFO",
+                    "transactionDescription": "Nuorder Shipment  of stylenumber : #{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.line_items.first.style_number')}  for HYF Portal",
+                    "EventType": "NuorderShipment",
+                    "EventDescription": "Nuorder Pricing of stylenumber : #{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.line_items.first.style_number')} for HYF Portal",
+                    "jobID": "#{_('data.workato.job_context.job_id')} ",
+                    "recipeID": "#{_('data.workato.job_context.recipe_id')}",
+                    "dateTime": "=now"
+                  }
+                }
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "message",
+                "label": "Message",
+                "properties": [
+                  {
+                    "label": "Error Handling Data",
+                    "name": "errorHandlingData",
+                    "optional": false,
+                    "type": "object",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Status",
+                        "name": "Status",
+                        "optional": false,
+                        "type": "string"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "LOB",
+                        "name": "LOB",
+                        "optional": false,
+                        "type": "string"
+                      },
+                      {
+                        "label": "Job Details",
+                        "name": "jobDetails",
+                        "optional": false,
+                        "type": "object",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "Identifier",
+                            "hint": "Identifier value for record or data. Ex: Account ID, External ID.",
+                            "name": "identifier",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Transaction type",
+                            "hint": "Type of action/s involved inside the catch scope. Ex: invocation, record insertion, mapping.",
+                            "name": "transactionType",
+                            "optional": true,
+                            "sticky": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Transaction description",
+                            "hint": "Brief description of action/s involved in the catch scope.",
+                            "name": "transactionDescription",
+                            "optional": true,
+                            "sticky": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Event type",
+                            "name": "EventType",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Event description",
+                            "name": "EventDescription",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Job ID",
+                            "hint": "Use Properties - Job ID.",
+                            "name": "jobID",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Recipe ID",
+                            "hint": "Use Properties - Recipe ID",
+                            "name": "recipeID",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Date/Time",
+                            "hint": "Timestamp of the action/s. Use timestamp of action or 'now' in formula mode.",
+                            "name": "dateTime",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Free text",
+                            "name": "freeText",
+                            "optional": true,
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      {
+                        "label": "Error Details",
+                        "name": "errorDetails",
+                        "of": "object",
+                        "optional": true,
+                        "type": "object",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "Parent Job ID",
+                            "hint": "Use Properties > Parent Job ID.",
+                            "name": "parentJobID",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Error code",
+                            "name": "errorCode",
+                            "optional": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Error message",
+                            "hint": "Use an error code defined in the error code lookup table",
+                            "name": "errorMessage",
+                            "optional": true,
+                            "sticky": true,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Stack trace",
+                            "hint": "Raw error message",
+                            "name": "stackTrace",
+                            "optional": true,
+                            "sticky": true,
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      {
+                        "label": "Custom data",
+                        "name": "customData",
+                        "optional": true,
+                        "type": "object",
+                        "properties": [
+                          {
+                            "name": "customFields",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Custom fields",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Key",
+                                "name": "key",
+                                "optional": true,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Value",
+                                "name": "value",
+                                "optional": true,
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          {
+                            "name": "customArrays",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Custom arrays",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Array name",
+                                "name": "arrayName",
+                                "optional": true,
+                                "type": "string"
+                              },
+                              {
+                                "name": "internalArray",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Internal array",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Value",
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "string"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "uuid": "4f9f58ad-b61a-4b57-8474-58442580992e",
+            "skip": true
+          },
+          {
+            "number": 3,
+            "provider": "nu_order_connector_594131_1651695621",
+            "name": "custom_action",
+            "as": "dc866c72",
+            "title": null,
+            "description": "<span class=\"provider\">Custom action</span> in <span class=\"provider\">NuORDER</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "input.data.suppress_emails": true
+            },
+            "input": {
+              "action_name": "Custom action",
+              "verb": "put",
+              "request_type": "json",
+              "response_type": "raw",
+              "path": "order/number/#{_('data.workato_recipe_function.c02ddd82.parameters.nuord_order_number')}/shipment",
+              "input": {
+                "schema": "[{\"control_type\":\"text\",\"label\":\"Type\",\"type\":\"string\",\"name\":\"type\",\"details\":{\"real_name\":\"type\"}},{\"name\":\"tracking_numbers\",\"type\":\"array\",\"of\":\"string\",\"control_type\":\"text\",\"label\":\"Tracking numbers\",\"details\":{\"real_name\":\"tracking_numbers\"}},{\"name\":\"line_items\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Line items\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Brand ID\",\"type\":\"string\",\"name\":\"brand_id\",\"details\":{\"real_name\":\"brand_id\"}},{\"control_type\":\"text\",\"label\":\"Season\",\"type\":\"string\",\"name\":\"season\",\"details\":{\"real_name\":\"season\"}},{\"control_type\":\"text\",\"label\":\"Style number\",\"type\":\"string\",\"name\":\"style_number\",\"details\":{\"real_name\":\"style_number\"}},{\"control_type\":\"text\",\"label\":\"Color\",\"type\":\"string\",\"name\":\"color\",\"details\":{\"real_name\":\"color\"}},{\"name\":\"sizes\",\"type\":\"array\",\"of\":\"object\",\"label\":\"Sizes\",\"properties\":[{\"control_type\":\"text\",\"label\":\"Size\",\"type\":\"string\",\"name\":\"size\",\"details\":{\"real_name\":\"size\"}},{\"control_type\":\"number\",\"label\":\"Quantity\",\"parse_output\":\"float_conversion\",\"type\":\"number\",\"name\":\"quantity\",\"details\":{\"real_name\":\"quantity\"}}],\"details\":{\"real_name\":\"sizes\"}}],\"details\":{\"real_name\":\"line_items\"}},{\"control_type\":\"text\",\"label\":\"Suppress emails\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Suppress emails\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"suppress_emails\"},\"type\":\"boolean\",\"name\":\"suppress_emails\",\"details\":{\"real_name\":\"suppress_emails\"}}]",
+                "data": {
+                  "type": "#{_('data.workato_recipe_function.c02ddd82.parameters.type')}",
+                  "tracking_numbers": "=_('data.workato_recipe_function.c02ddd82.parameters.tracking_numbers')",
+                  "suppress_emails": "#{_('data.workato_recipe_function.c02ddd82.parameters.suppress_emails')}",
+                  "line_items": {
+                    "____source": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items')}",
+                    "brand_id": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.brand_id')}",
+                    "season": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.season')}",
+                    "style_number": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.style_number')}",
+                    "color": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.color')}",
+                    "sizes": {
+                      "size": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.sizes.first.size')}",
+                      "quantity": "#{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.sizes.first.quantity')}"
+                    }
+                  }
+                }
+              }
+            },
+            "extended_output_schema": [
+              {
+                "type": "string",
+                "name": "body",
+                "control_type": "text",
+                "label": "Body",
+                "optional": true
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "type": "string",
+                "name": "path",
+                "control_type": "text",
+                "label": "Path",
+                "hint": "Base URI is <b>https://sandbox1.nuorder.com/api/</b> - path will be appended to this URI. Use absolute URI to override this base URI.",
+                "optional": false
+              },
+              {
+                "type": "string",
+                "name": "request_type",
+                "control_type": "select",
+                "label": "Request type",
+                "default": "json",
+                "sticky": true,
+                "pick_list": [
+                  [
+                    "JSON request body",
+                    "json"
+                  ],
+                  [
+                    "URL encoded form",
+                    "url_encoded_form"
+                  ],
+                  [
+                    "Mutipart form",
+                    "multipart"
+                  ],
+                  [
+                    "Raw request body",
+                    "raw"
+                  ]
+                ],
+                "optional": true,
+                "extends_schema": true
+              },
+              {
+                "type": "string",
+                "name": "response_type",
+                "control_type": "select",
+                "label": "Response type",
+                "default": "json",
+                "sticky": false,
+                "pick_list": [
+                  [
+                    "JSON response",
+                    "json"
+                  ],
+                  [
+                    "Raw response",
+                    "raw"
+                  ]
+                ],
+                "optional": true,
+                "extends_schema": true
+              },
+              {
+                "type": "object",
+                "name": "input",
+                "label": "Request body parameters",
+                "sticky": true,
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "schema-designer",
+                    "label": "Schema",
+                    "sticky": false,
+                    "extends_schema": true,
+                    "schema_neutral": true,
+                    "sample_data_type": "json_input",
+                    "optional": true,
+                    "type": "string",
+                    "name": "schema"
+                  },
+                  {
+                    "label": "Data",
+                    "optional": true,
+                    "type": "object",
+                    "name": "data",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Type",
+                        "details": {
+                          "real_name": "type"
+                        },
+                        "sticky": true,
+                        "optional": true,
+                        "type": "string",
+                        "name": "type"
+                      },
+                      {
+                        "name": "tracking_numbers",
+                        "type": "array",
+                        "of": "string",
+                        "label": "Tracking numbers",
+                        "details": {
+                          "real_name": "tracking_numbers"
+                        },
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "name": "line_items",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Line items",
+                        "details": {
+                          "real_name": "line_items"
+                        },
+                        "sticky": true,
+                        "optional": true,
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "Brand ID",
+                            "details": {
+                              "real_name": "brand_id"
+                            },
+                            "sticky": true,
+                            "optional": true,
+                            "type": "string",
+                            "name": "brand_id"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Season",
+                            "details": {
+                              "real_name": "season"
+                            },
+                            "sticky": true,
+                            "optional": true,
+                            "type": "string",
+                            "name": "season"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Style number",
+                            "details": {
+                              "real_name": "style_number"
+                            },
+                            "sticky": true,
+                            "optional": true,
+                            "type": "string",
+                            "name": "style_number"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "Color",
+                            "details": {
+                              "real_name": "color"
+                            },
+                            "sticky": true,
+                            "optional": true,
+                            "type": "string",
+                            "name": "color"
+                          },
+                          {
+                            "name": "sizes",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Sizes",
+                            "details": {
+                              "real_name": "sizes"
+                            },
+                            "sticky": true,
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Size",
+                                "details": {
+                                  "real_name": "size"
+                                },
+                                "sticky": true,
+                                "optional": true,
+                                "type": "string",
+                                "name": "size"
+                              },
+                              {
+                                "control_type": "number",
+                                "label": "Quantity",
+                                "parse_output": "float_conversion",
+                                "details": {
+                                  "real_name": "quantity"
+                                },
+                                "sticky": true,
+                                "optional": true,
+                                "type": "number",
+                                "name": "quantity"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Suppress emails",
+                        "parse_output": {
+                        },
+                        "render_input": {
+                        },
+                        "toggle_hint": "Select from option list",
+                        "toggle_field": {
+                          "label": "Suppress emails",
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "type": "boolean",
+                          "name": "suppress_emails"
+                        },
+                        "details": {
+                          "real_name": "suppress_emails"
+                        },
+                        "sticky": true,
+                        "optional": true,
+                        "type": "number",
+                        "name": "suppress_emails"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "array",
+                "name": "request_headers",
+                "control_type": "key_value",
+                "label": "Request headers",
+                "sticky": false,
+                "optional": true,
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Key",
+                    "optional": true,
+                    "type": "string",
+                    "name": "key"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Value",
+                    "optional": true,
+                    "type": "string",
+                    "name": "value"
+                  }
+                ],
+                "extends_schema": true
+              },
+              {
+                "type": "string",
+                "name": "response_headers",
+                "control_type": "schema-designer",
+                "label": "Response headers",
+                "sticky": false,
+                "optional": true,
+                "extends_schema": true,
+                "schema_neutral": true
+              }
+            ],
+            "visible_config_fields": [
+              "action_name",
+              "verb",
+              "path",
+              "request_type",
+              "response_type",
+              "input",
+              "input.schema",
+              "input.data",
+              "input.data.pricing",
+              "input.data.pricing.wholesale",
+              "input.data.pricing.retail",
+              "input.data.pricing.disabled",
+              "input.data.pricing.date_based_pricing",
+              "input.data.pricing.date_based_pricing.wholesale",
+              "input.data.pricing.date_based_pricing.retail",
+              "input.data.pricing.date_based_pricing.start_date",
+              "input.data.pricing.date_based_pricing.end_date",
+              "input.data.pricing.currency_code",
+              "input.data.pricing.template",
+              "input.data.pricing.style_number",
+              "input.data.pricing.season",
+              "input.data.pricing.color",
+              "input.data.pricing.brand_id",
+              "output",
+              "response_headers"
+            ],
+            "uuid": "a4bd7aa5-611a-4924-b315-d1bd2fe393b9",
+            "skip": false
+          },
+          {
+            "number": 4,
+            "as": "1501ad88",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+              {
+                "number": 5,
+                "provider": "workato_pub_sub",
+                "name": "publish_to_topic",
+                "as": "1a3bafb2",
+                "title": null,
+                "description": "Publish <span class=\"provider\">message</span> to <span class=\"provider\">AOF | PS-001 | AOF_Topic</span> PubSub topic",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "topic_id": "AOF | PS-001 | AOF_Topic"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "topic_id": {
+                    "zip_name": "aof_ps_001_aof_topic.topic.json",
+                    "name": "AOF | PS-001 | AOF_Topic",
+                    "folder": ""
+                  },
+                  "message": {
+                    "errorHandlingData": {
+                      "Status": "ERROR",
+                      "LOB": "NuorderItem Shipment  for HYF Portal",
+                      "jobDetails": {
+                        "identifier": "\"Tracking #: ' + #{_('data.workato_recipe_function.c02ddd82.parameters.tracking_numbers')}",
+                        "transactionType": "ERROR",
+                        "transactionDescription": "Nuordershipment Error of Stylenumber: #{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.style_number')} for HYF Portal",
+                        "EventType": "Nuordershipment",
+                        "EventDescription": "Nuordershipment Error of Stylenumber: #{_('data.workato_recipe_function.c02ddd82.parameters.line_items.first.style_number')} for HYF portal",
+                        "jobID": "#{_('data.workato.job_context.job_id')}",
+                        "recipeID": "#{_('data.workato.job_context.recipe_id')}",
+                        "dateTime": "=now",
+                        "freeText": "=_('data.workato_recipe_function.c02ddd82.parameters').to_json"
+                      },
+                      "errorDetails": {
+                        "errorMessage": "#{_('data.catch.1501ad88.message')}",
+                        "stackTrace": "#{_('data.workato.job_context.recipe_path')}",
+                        "parentJobID": "#{_('data.workato.job_context.parent_job_id')}"
+                      }
+                    }
+                  }
+                },
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "message",
+                    "label": "Message",
+                    "properties": [
+                      {
+                        "label": "Error Handling Data",
+                        "name": "errorHandlingData",
+                        "optional": false,
+                        "type": "object",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "Status",
+                            "name": "Status",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "LOB",
+                            "name": "LOB",
+                            "optional": false,
+                            "type": "string"
+                          },
+                          {
+                            "label": "Job Details",
+                            "name": "jobDetails",
+                            "optional": false,
+                            "type": "object",
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Identifier",
+                                "hint": "Identifier value for record or data. Ex: Account ID, External ID.",
+                                "name": "identifier",
+                                "optional": false,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Transaction type",
+                                "hint": "Type of action/s involved inside the catch scope. Ex: invocation, record insertion, mapping.",
+                                "name": "transactionType",
+                                "optional": true,
+                                "sticky": true,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Transaction description",
+                                "hint": "Brief description of action/s involved in the catch scope.",
+                                "name": "transactionDescription",
+                                "optional": true,
+                                "sticky": true,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Event type",
+                                "name": "EventType",
+                                "optional": false,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Event description",
+                                "name": "EventDescription",
+                                "optional": false,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Job ID",
+                                "hint": "Use Properties - Job ID.",
+                                "name": "jobID",
+                                "optional": false,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Recipe ID",
+                                "hint": "Use Properties - Recipe ID",
+                                "name": "recipeID",
+                                "optional": false,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Date/Time",
+                                "hint": "Timestamp of the action/s. Use timestamp of action or 'now' in formula mode.",
+                                "name": "dateTime",
+                                "optional": false,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Free text",
+                                "name": "freeText",
+                                "optional": true,
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Error Details",
+                            "name": "errorDetails",
+                            "of": "object",
+                            "optional": true,
+                            "type": "object",
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Parent Job ID",
+                                "hint": "Use Properties > Parent Job ID.",
+                                "name": "parentJobID",
+                                "optional": true,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Error code",
+                                "name": "errorCode",
+                                "optional": true,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Error message",
+                                "hint": "Use an error code defined in the error code lookup table",
+                                "name": "errorMessage",
+                                "optional": true,
+                                "sticky": true,
+                                "type": "string"
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "Stack trace",
+                                "hint": "Raw error message",
+                                "name": "stackTrace",
+                                "optional": true,
+                                "sticky": true,
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Custom data",
+                            "name": "customData",
+                            "optional": true,
+                            "type": "object",
+                            "properties": [
+                              {
+                                "name": "customFields",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Custom fields",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Key",
+                                    "name": "key",
+                                    "optional": true,
+                                    "type": "string"
+                                  },
+                                  {
+                                    "control_type": "text",
+                                    "label": "Value",
+                                    "name": "value",
+                                    "optional": true,
+                                    "type": "string"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "customArrays",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Custom arrays",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Array name",
+                                    "name": "arrayName",
+                                    "optional": true,
+                                    "type": "string"
+                                  },
+                                  {
+                                    "name": "internalArray",
+                                    "type": "array",
+                                    "of": "object",
+                                    "label": "Internal array",
+                                    "optional": true,
+                                    "properties": [
+                                      {
+                                        "control_type": "text",
+                                        "label": "Value",
+                                        "name": "value",
+                                        "optional": true,
+                                        "type": "string"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "visible_config_fields": [
+                  "topic_id",
+                  "message.errorHandlingData.jobDetails.transactionType",
+                  "message.errorHandlingData.jobDetails.transactionDescription",
+                  "message.errorHandlingData.errorDetails.errorMessage",
+                  "message.errorHandlingData.errorDetails.stackTrace",
+                  "message.errorHandlingData.errorDetails.parentJobID",
+                  "message.errorHandlingData.jobDetails.freeText"
+                ],
+                "uuid": "a16dbc47-f449-40df-983c-b935ddb335c0",
+                "skip": false
+              }
+            ],
+            "uuid": "6e6b12b2-50b9-4c8a-8658-ea6039cc7e22"
+          }
+        ],
+        "uuid": "e5b2a3d5-79c7-4fd6-bdf3-790101775cfc"
+      }
+    ],
+    "job_report_schema": [
+      {
+        "name": "custom_column_0",
+        "label": "Trackingnumber"
+      },
+      {
+        "name": "custom_column_1",
+        "label": "Type"
+      },
+      {
+        "name": "custom_column_2",
+        "label": "Brand_Id"
+      },
+      {
+        "name": "custom_column_3",
+        "label": "Stylenumber"
+      }
+    ],
+    "job_report_config": {
+      "custom_column_0": "#{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.trackingnumbers')}",
+      "custom_column_1": "#{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.type')}",
+      "custom_column_2": "#{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.line_items.first.brand_id')}",
+      "custom_column_3": "#{_('data.workato_recipe_function.c02ddd82.parameters.Shipment.first.line_items.first.style_number')}"
+    },
+    "uuid": "a9edd899-1f1b-46d1-a756-92d16d59b5ce"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "nu_order_connector_594131_1651695621",
+      "account_id": {
+        "zip_name": "nuorder_hyf_sandbox_api.connection.json",
+        "name": "NuOrder HYF - Sandbox API",
+        "folder": "",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_pub_sub",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "name": "NuOrder_Company",
+  "schema": [
+    {
+      "control_type": "text",
+      "label": "NAME",
+      "name": "NAME",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "COMPANY CODE",
+      "name": "COMPANY_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CURRENCY CODE",
+      "name": "CURRENCY_CODE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "ACTIVE",
+      "name": "ACTIVE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PAYMENT TERMS",
+      "name": "PAYMENT_TERMS",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "DEFAULT DISCOUNT",
+      "name": "DEFAULT_DISCOUNT",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "DEFAULT SURCHARGE",
+      "name": "DEFAULT_SURCHARGE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CUSTOMER GROUP",
+      "name": "CUSTOMER_GROUP",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PRICE SHEET",
+      "name": "PRICE_SHEET",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "integer",
+      "label": "WAREHOUSE",
+      "parse_output": "integer_conversion",
+      "name": "WAREHOUSE",
+      "type": "integer",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PHONE",
+      "name": "PHONE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "WEBSITE",
+      "name": "WEBSITE",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "name": "ADDRESSES",
+      "type": "array",
+      "of": "object",
+      "label": "ADDRESSES",
+      "optional": true,
+      "properties": [
+        {
+          "control_type": "text",
+          "label": "ADDRESS PHONE",
+          "name": "ADDRESS_PHONE",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "DEFAULT SHIPPING",
+          "name": "DEFAULT_SHIPPING",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "integer",
+          "label": "SHIPPING CODE",
+          "parse_output": "integer_conversion",
+          "name": "SHIPPING_CODE",
+          "type": "integer",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "DEFAULT BILLING",
+          "name": "DEFAULT_BILLING",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "integer",
+          "label": "BILLING CODE",
+          "parse_output": "integer_conversion",
+          "name": "BILLING_CODE",
+          "type": "integer",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "SITE STATUS",
+          "name": "SITE_STATUS",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS COUNTRY",
+          "name": "ADDRESS_COUNTRY",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS ZIP",
+          "name": "ADDRESS_ZIP",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS STATE",
+          "name": "ADDRESS_STATE",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS CITY",
+          "name": "ADDRESS_CITY",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS LINE 2",
+          "name": "ADDRESS_LINE2",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS LINE 1",
+          "name": "ADDRESS_LINE1",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS DESCRIPTION",
+          "name": "ADDRESS_DESCRIPTION",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "control_type": "text",
+          "label": "ADDRESS TYPE",
+          "name": "ADDRESS_TYPE",
+          "type": "string",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "control_type": "text",
+      "label": "CREDIT STATUS",
+      "name": "CREDIT_STATUS",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "CREDIT CARD WHITE LIST",
+      "name": "CREDIT_CARD_WHITE_LIST",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "PORTAL",
+      "name": "PORTAL",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "text",
+      "label": "OPERATION",
+      "name": "OPERATION",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "CREATE BY",
+      "parse_output": "float_conversion",
+      "name": "CREATE_BY",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "date_time",
+      "label": "CREATION DATE",
+      "render_input": "date_time_conversion",
+      "parse_output": "date_time_conversion",
+      "name": "CREATION_DATE",
+      "type": "date_time",
+      "optional": false
+    },
+    {
+      "control_type": "number",
+      "label": "LAST UPDATED BY",
+      "parse_output": "float_conversion",
+      "name": "LAST_UPDATED_BY",
+      "type": "number",
+      "optional": false
+    },
+    {
+      "control_type": "date_time",
+      "label": "LAST UPDATE DATE",
+      "render_input": "date_time_conversion",
+      "parse_output": "date_time_conversion",
+      "name": "LAST_UPDATE_DATE",
+      "type": "date_time",
+      "optional": false
+    }
+  ]
+}
